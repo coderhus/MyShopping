@@ -74,6 +74,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"/>
             <EditText
+                android:id="@+id/password"
                 android:textColorHint="@color/colorPlaceholder"
                 android:layout_marginTop="24dp"
                 android:drawableEnd="@drawable/lock_icon"
