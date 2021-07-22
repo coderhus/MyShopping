@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home) ;
 
         AnhXa();
-        if(user == null) {
+        if(user == null ) {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
         }
