@@ -1,4 +1,4 @@
-package com.example.myshopping;
+package com.example.myshopping.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.text.method.SingleLineTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.myshopping.R;
 
 public class LoginActivity extends AppCompatActivity {
 
