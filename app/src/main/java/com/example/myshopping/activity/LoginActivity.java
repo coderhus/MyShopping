@@ -61,7 +61,15 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-
+        // lưu gmail với pass sau khi tạo ở register
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            String gmail = bundle.getString("gmail", "");
+            String pass =bundle.getString("pass", "");
+            gmail_login.setText(gmail);
+            password_edt.setText(pass);
+        }
     }
     private void login(){
         String email = gmail_login.getText().toString();
@@ -72,11 +80,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
+                            if(mAuth.getCurrentUser().isEmailVerified()) {
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
+                                        Toast.LENGTH_SHORT).show();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                mAuth.signOut();
+                                Toast.makeText(LoginActivity.this,"Vui lòng xác nhận gmail trước khi đăng nhập",Toast.LENGTH_SHORT).show();
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Sai gmail hoặc mật khẩu!",

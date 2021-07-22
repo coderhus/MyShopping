@@ -1,6 +1,6 @@
 package com.example.myshopping.model;
 
-public class    Category {
+public class Category {
     private String id;
     private String name;
     private String id_parents;

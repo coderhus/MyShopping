@@ -105,14 +105,25 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công",
-                                        Toast.LENGTH_SHORT).show();
-                                pushInfotoDatabase(mail);
-                                //Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                startActivity(intent);
+                                final FirebaseUser userFB = task.getResult().getUser();
+                                if(userFB!=null){
+                                    userFB.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công",
+                                                    Toast.LENGTH_SHORT).show();
+                                            pushInfotoDatabase(mail);
+                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("gmail",mail); // Truyền một String
+                                            bundle.putString("pass", password);
+                                            intent.putExtras(bundle);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(RegisterActivity.this, "Tạo tài khoản thất bại. Quý khách vui lòng thử lại",

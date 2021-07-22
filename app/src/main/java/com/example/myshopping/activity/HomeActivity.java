@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
         // allCategory
+
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
