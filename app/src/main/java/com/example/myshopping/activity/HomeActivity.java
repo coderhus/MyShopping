@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView popularRecycler, otherRecycler,categoryRecyclerView;
     PopularProductAdapter popularProductAdapter;
     CategoryProductAdapter categoryProductAdapter;
-    CategoryAdapter categoryAdapter ;
+    CategoryAdapter categoryAdapter;
     TextView allCategory;
 
     @Override
