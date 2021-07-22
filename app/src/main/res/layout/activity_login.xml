@@ -59,6 +59,7 @@
             android:orientation="vertical"
             android:layout_centerVertical="true">
             <EditText
+                android:id="@+id/gmail_login"
                 android:textColorHint="@color/colorPlaceholder"
                 android:drawableEnd="@drawable/user_icon"
                 android:drawableTint="@color/colorTextBlack"
@@ -120,6 +121,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_weight="1" />
                 <Button
+                    android:id="@+id/login"
                     android:layout_width="0dp"
                     android:layout_height="52dp"
                     android:layout_weight="1"

@@ -15,12 +15,14 @@ import com.example.myshopping.adapter.CategoryProductAdapter;
 import com.example.myshopping.adapter.PopularProductAdapter;
 import com.example.myshopping.model.Category;
 import com.example.myshopping.model.Products;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     RecyclerView popularRecycler, otherRecycler,categoryRecyclerView;
     PopularProductAdapter popularProductAdapter;
     CategoryProductAdapter categoryProductAdapter;
@@ -33,6 +35,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         AnhXa();
+        if(user == null) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
         // allCategory
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override

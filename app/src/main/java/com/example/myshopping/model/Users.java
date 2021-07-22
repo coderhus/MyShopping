@@ -2,7 +2,7 @@ package com.example.myshopping.model;
 public class Users {
     private String id;
     private String name;
-    private long created_at; // lấy cái đổi time ở app trước (timestamp)
+    private String created_at; // lấy cái đổi time ở app trước (timestamp)
     private String gmail;
     private String phone;
     private String address;
@@ -13,7 +13,14 @@ public class Users {
 
     }
 
-    public Users(String id, String name, long created_at, String gmail, String phone, String address, int gender, String birtday, String photo) {
+    public Users(String id, String name, String created_at, String gmail) {
+        this.id = id;
+        this.name = name;
+        this.created_at = created_at;
+        this.gmail = gmail;
+    }
+
+    public Users(String id, String name, String created_at, String gmail, String phone, String address, int gender, String birtday, String photo) {
         this.id = id;
         this.name = name;
         this.created_at = created_at;
@@ -41,11 +48,11 @@ public class Users {
         this.name = name;
     }
 
-    public long getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(long created_at) {
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 

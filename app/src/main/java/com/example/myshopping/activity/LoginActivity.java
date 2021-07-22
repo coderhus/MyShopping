@@ -1,5 +1,6 @@
 package com.example.myshopping.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,21 +8,28 @@ import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.SingleLineTransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myshopping.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private FirebaseAuth mAuth;
     TextView register_txt;
-    EditText password_edt;
-
+    EditText password_edt,gmail_login;
+    Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        mAuth = FirebaseAuth.getInstance();
         AnhXa();
 
         // click
@@ -46,12 +54,41 @@ public class LoginActivity extends AppCompatActivity {
                 password_edt.setSelection(password_edt.getText().length());
             }
         });
-        
-        
-    }
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                login();
+            }
+        });
+
+    }
+    private void login(){
+        String email = gmail_login.getText().toString();
+        String password = password_edt.getText().toString();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
+                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Sai gmail hoặc mật khẩu!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
     private void AnhXa() {
         register_txt = (TextView)findViewById(R.id.register);
         password_edt = (EditText) findViewById(R.id.password);
+        gmail_login = findViewById(R.id.gmail_login);
+        login = findViewById(R.id.login);
     }
 }
