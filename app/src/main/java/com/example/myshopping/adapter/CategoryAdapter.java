@@ -38,10 +38,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-       // holder.categoryImage.setImageResource(categoryList.get(position).getImageurl());
+        // holder.categoryImage.setImageResource(categoryList.get(position).getImageurl());
         // dùng glide để chèn ảnh từ firebase về
         Glide.with(context).load(categoryList.get(position).getImageurl()).into(holder.categoryImage);
-        holder.categoryName.setText(categoryList.get(position).getName());
+
+        String cateName = categoryList.get(position).getName();
+        if(cateName.length()>=14)
+               cateName = cateName.substring(0,14)+"...";
+        holder.categoryName.setText(cateName);
     }
 
     @Override
@@ -55,7 +59,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         TextView categoryName;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-
             categoryImage = itemView.findViewById(R.id.category_image);
             categoryName = itemView.findViewById(R.id.category_name);
         }
