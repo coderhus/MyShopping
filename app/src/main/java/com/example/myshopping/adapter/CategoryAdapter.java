@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
        // holder.categoryImage.setImageResource(categoryList.get(position).getImageurl());
         // dùng glide để chèn ảnh từ firebase về
         Glide.with(context).load(categoryList.get(position).getImageurl()).into(holder.categoryImage);
+        holder.categoryName.setText(categoryList.get(position).getName());
     }
 
     @Override
@@ -50,12 +52,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public  static class CategoryViewHolder extends RecyclerView.ViewHolder{
 
         ImageView categoryImage;
-
+        TextView categoryName;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             categoryImage = itemView.findViewById(R.id.category_image);
-
+            categoryName = itemView.findViewById(R.id.category_name);
         }
     }
 
