@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             password_edt.setText(pass);
         }
     }
+
     private void login(){
         String email = gmail_login.getText().toString();
         String password = password_edt.getText().toString();
@@ -100,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void AnhXa() {
         register_txt = (TextView)findViewById(R.id.register);
         password_edt = (EditText) findViewById(R.id.password);

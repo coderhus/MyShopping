@@ -82,9 +82,9 @@ public class AllCategoryActivity extends AppCompatActivity {
     }
 
     private void setCategoryRecycler(List<Category> categoryList) {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 4);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 3);
         categoryRecycler.setLayoutManager(layoutManager);
-        categoryRecycler.addItemDecoration(new GridSpacingItemDecoration(4, dpToPx(16), true));
+        categoryRecycler.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(16), true));
         categoryRecycler.setItemAnimator(new DefaultItemAnimator());
         categoryAdapter = new CategoryAdapter(this,categoryList);
         categoryRecycler.setAdapter(categoryAdapter);

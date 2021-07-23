@@ -1,8 +1,5 @@
 package com.example.myshopping.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
@@ -10,8 +7,10 @@ import android.text.method.SingleLineTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myshopping.R;
 import com.example.myshopping.model.Users;
@@ -43,8 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
+
         AnhXa();
 
+        //
         inputPW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +59,24 @@ public class RegisterActivity extends AppCompatActivity {
                 inputPW.setSelection(inputPW.getText().length());
             }
         });
-      /*  alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
+
+        //
+        inputCPW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (inputCPW.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                    inputCPW.setTransformationMethod(new SingleLineTransformationMethod());
+                }
+                else {
+                    inputCPW.setTransformationMethod(new PasswordTransformationMethod());
+                }
+
+                inputCPW.setSelection(inputCPW.getText().length());
+            }
+        });
+
+        //
+        /*  alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -71,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     void checkEmailExistsOrNot(){
         int n =0;
         mAuth.fetchSignInMethodsForEmail(gmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
@@ -92,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     private void CreateAccount(){
         final String mail = gmail.getText().toString();
         String password = inputPW.getText().toString();
@@ -133,6 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         }
     }
+
     public void pushInfotoDatabase(String mail){
         String name = username.getText().toString();
         String id = mAuth.getUid();
@@ -140,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
         Users user = new Users(id,name,timecreate,mail);
         myRef.child(id).setValue(user);
     }
+
     private void AnhXa() {
         inputPW =(EditText) findViewById(R.id.inputPassword);
         inputCPW =(EditText) findViewById(R.id.inputConformPassword);
