@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.myshopping.R;
 import com.example.myshopping.model.Category;
 
@@ -36,9 +37,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-
-        holder.categoryImage.setImageResource(categoryList.get(position).getImageurl());
-
+       // holder.categoryImage.setImageResource(categoryList.get(position).getImageurl());
+        // dùng glide để chèn ảnh từ firebase về
+        Glide.with(context).load(categoryList.get(position).getImageurl()).into(holder.categoryImage);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.myshopping.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,11 @@ import android.widget.ImageView;
 import com.example.myshopping.R;
 import com.example.myshopping.adapter.CategoryAdapter;
 import com.example.myshopping.model.Category;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +31,8 @@ public class AllCategoryActivity extends AppCompatActivity {
 
     RecyclerView categoryRecycler;
     CategoryAdapter categoryAdapter;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Category");
     ImageView back;
 
 
@@ -48,18 +55,25 @@ public class AllCategoryActivity extends AppCompatActivity {
 
         //
         List<Category> categoryList = new ArrayList<>();
-
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-        categoryList.add(new Category( ""," ",0,R.drawable.ic_home_fish));
-
         setCategoryRecycler(categoryList);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                categoryList.clear();
+                for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
+                    Category a = postsnap.getValue(Category.class);
+                    categoryList.add(a);
+                }
+                //
+                if(!categoryList.isEmpty()){
+                    setCategoryRecycler(categoryList);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
     }
 
     private void AnhXa() {
