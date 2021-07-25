@@ -1,4 +1,4 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 
 public class Comment {
     private String id_user;

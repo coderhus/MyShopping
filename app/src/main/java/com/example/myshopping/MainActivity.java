@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
-import com.example.myshopping.activity.LoginActivity;
+import com.example.myshopping.Activity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 

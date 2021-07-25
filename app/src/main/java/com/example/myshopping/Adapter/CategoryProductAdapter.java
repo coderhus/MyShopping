@@ -1,5 +1,5 @@
 
-package com.example.myshopping.adapter;
+package com.example.myshopping.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myshopping.R;
-import com.example.myshopping.model.Products;
+import com.example.myshopping.Model.Products;
 
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class CategoryProductAdapter extends RecyclerView.Adapter<CategoryProduct
 
         holder.photos.setImageResource(categoryProductList.get(position).getPhotos());
         holder.name.setText(categoryProductList.get(position).getName());
-        holder.price.setText(categoryProductList.get(position).getPrice());
+        holder.price.setText(String.valueOf(categoryProductList.get(position).getPrice()+"$"));
         holder.rating.setText(categoryProductList.get(position).getId_products());
         holder.restorantName.setText(categoryProductList.get(position).getId_seller());
 

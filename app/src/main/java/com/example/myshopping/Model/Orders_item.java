@@ -1,10 +1,10 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Orders_item {
     private String id_orders;
-    private List<Products> products = new LinkedList<>();
+    private List<Products> products;
     public Orders_item(){
 
     }

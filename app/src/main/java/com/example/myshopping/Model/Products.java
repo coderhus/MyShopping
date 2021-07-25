@@ -1,17 +1,17 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 
 public class Products {
     private String id_products;
     private String id_seller;
     private String name;
     private String describe;
-    private String price;
+    private double price;
     private Integer photos;
 
     public Products(){
 
     }
-    public Products(String id_products, String id_seller, String name, String describe, String price, int photos) {
+    public Products(String id_products, String id_seller, String name, String describe, double price, int photos) {
         this.id_products = id_products;
         this.id_seller = id_seller;
         this.name = name;
@@ -53,11 +53,11 @@ public class Products {
         this.describe = describe;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -67,6 +67,11 @@ public class Products {
 
     public Integer getPhotos() {
         return photos;
+    }
+
+
+    public int getNumberInCart() {
+        return 1;
     }
 
 

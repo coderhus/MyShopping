@@ -1,9 +1,8 @@
-package com.example.myshopping.activity;
+package com.example.myshopping.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -16,8 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.myshopping.R;
-import com.example.myshopping.adapter.CategoryAdapter;
-import com.example.myshopping.model.Category;
+import com.example.myshopping.Adapter.CategoryAdapter;
+import com.example.myshopping.Model.Category;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

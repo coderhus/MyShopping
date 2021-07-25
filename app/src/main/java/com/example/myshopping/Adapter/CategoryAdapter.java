@@ -1,4 +1,4 @@
-package com.example.myshopping.adapter;
+package com.example.myshopping.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myshopping.R;
-import com.example.myshopping.model.Category;
+import com.example.myshopping.Model.Category;
 
 import java.util.List;
 

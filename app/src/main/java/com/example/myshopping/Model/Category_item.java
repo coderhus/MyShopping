@@ -1,4 +1,4 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 public class Category_item {
     private String id_category;
     private String id_product;

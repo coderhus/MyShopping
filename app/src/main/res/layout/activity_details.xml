@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E5E5E5"
-    tools:context="activity.DetailsActivity">
+    tools:context="Activity.DetailsActivity">
 
 
 
 
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/textview_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -46,8 +46,8 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/textview_1"
+        app:layout_constraintBottom_toTopOf="@+id/plus_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp">
@@ -57,14 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@+id/textview_1"
             app:layout_constraintStart_toStartOf="parent"
             >
 
 
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/photoImage"
                 android:layout_width="285dp"
                 android:layout_height="285dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                app:layout_constraintTop_toBottomOf="@+id/photoImage" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -151,11 +151,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/restaurantName_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/regular"
                 android:text="VEGITARIAN FOOD"
                 android:textColor="#FF6813"
@@ -164,7 +164,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/itemName_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -172,8 +172,8 @@
                 android:text="Float Cake Vietnam"
                 android:textColor="#091020"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="@+id/restaurantName_txt"
+                app:layout_constraintTop_toBottomOf="@+id/restaurantName_txt" />
 
             <ImageView
                 android:id="@+id/imageView9"
@@ -181,7 +181,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="@+id/restaurantName_txt"
                 app:srcCompat="@drawable/tagfree" />
 
 
@@ -197,14 +197,14 @@
                 android:text="Banh troi are small white balls made of brown sugar, wrapped in glutinous rice flour. The name floating cakes came about from the way it is actually cooked."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/itemName_txt" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/minus_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="21dp"
@@ -214,7 +214,7 @@
         app:srcCompat="@drawable/ic_group_400" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/numberOrderTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -222,22 +222,22 @@
         android:text="01"
         android:textColor="#272670"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+        app:layout_constraintBottom_toBottomOf="@+id/minus_image"
+        app:layout_constraintStart_toEndOf="@+id/minus_image"
+        app:layout_constraintTop_toTopOf="@+id/minus_image" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/plus_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView13"
-        app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toTopOf="@+id/textView13"
+        app:layout_constraintBottom_toBottomOf="@+id/numberOrderTxt"
+        app:layout_constraintStart_toEndOf="@+id/numberOrderTxt"
+        app:layout_constraintTop_toTopOf="@+id/numberOrderTxt"
         app:srcCompat="@drawable/ic_group_401" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/priceItem_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -245,12 +245,12 @@
         android:text="$5.78"
         android:textColor="#272670"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintBottom_toBottomOf="@+id/plus_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView11" />
+        app:layout_constraintTop_toTopOf="@+id/plus_image" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/addToCart_Image"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"

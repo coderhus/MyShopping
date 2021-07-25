@@ -1,4 +1,4 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 
 public class Category {
     private String id;

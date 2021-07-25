@@ -1,4 +1,4 @@
-package com.example.myshopping.activity;
+package com.example.myshopping.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +10,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myshopping.R;
-import com.example.myshopping.adapter.CategoryAdapter;
-import com.example.myshopping.adapter.CategoryProductAdapter;
-import com.example.myshopping.adapter.PopularProductAdapter;
-import com.example.myshopping.model.Category;
-import com.example.myshopping.model.Products;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.myshopping.Adapter.CategoryAdapter;
+import com.example.myshopping.Adapter.CategoryProductAdapter;
+import com.example.myshopping.Adapter.PopularProductAdapter;
+import com.example.myshopping.Model.Category;
+import com.example.myshopping.Model.Products;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,35 +49,28 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home) ;
 
-        AnhXa();
-
-        // BottomNavigationView
-        clickBottomNavigationView();
-
         //
         if(user == null ) {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
         }
 
-        //  allCategory
-        allCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this, AllCategoryActivity.class);
-                startActivity(i);
-            }
-        });
+        AnhXa();
+        bottomNavigationView();
+        initList();
+        function();
+    }
 
+    private void initList() {
         //
         List<Products> popularProductList = new ArrayList<>();
 
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
 
         setPopularRecycler(popularProductList);
 
@@ -88,12 +78,12 @@ public class HomeActivity extends AppCompatActivity {
 
         List<Products> categoryProductList = new ArrayList<>();
 
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam","$7.05",R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
 
         setAsiaRecycler(categoryProductList);
 
@@ -120,7 +110,18 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void clickBottomNavigationView() {
+    private void function(){
+        //  allCategory
+        allCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, AllCategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void bottomNavigationView() {
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -151,8 +152,9 @@ public class HomeActivity extends AppCompatActivity {
         allCategory = (TextView) findViewById(R.id.allCategoryImage);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
+
     //
-   /* private void addCategory(){
+    /* private void addCategory(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Category");
         String anh = "https://firebasestorage.googleapis.com/v0/b/myshopping-ee0cb.appspot.com/o/Category_photo%2FCategory_item%2FGi%C3%A0y%20d%C3%A9p%20nam.png?alt=media&token=c8acd6b7-4bff-4f7b-be05-0ffb91cbef01";

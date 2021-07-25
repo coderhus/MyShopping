@@ -1,4 +1,4 @@
-package com.example.myshopping.model;
+package com.example.myshopping.Model;
 
 import java.util.LinkedList;
 import java.util.List;

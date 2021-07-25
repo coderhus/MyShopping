@@ -1,4 +1,4 @@
-package com.example.myshopping.activity;
+package com.example.myshopping.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myshopping.R;
-import com.example.myshopping.model.Users;
+import com.example.myshopping.Model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;

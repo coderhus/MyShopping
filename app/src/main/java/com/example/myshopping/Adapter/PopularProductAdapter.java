@@ -1,4 +1,4 @@
-package com.example.myshopping.adapter;
+package com.example.myshopping.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myshopping.R;
-import com.example.myshopping.activity.DetailsActivity;
-import com.example.myshopping.model.Products;
+import com.example.myshopping.Activity.DetailsActivity;
+import com.example.myshopping.Model.Products;
 
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
     Context context;
     List<Products> popularProductList;
+
 
 
 
@@ -44,15 +46,17 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
         holder.photos.setImageResource(popularProductList.get(position).getPhotos());
         holder.name.setText(popularProductList.get(position).getName());
-        holder.price.setText(popularProductList.get(position).getPrice());
+        holder.price.setText(String.valueOf(popularProductList.get(position).getPrice()+"$"));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("id_prodcuts",popularProductList.get(position).getId_products());
                 context.startActivity(i);
             }
         });
+
 
 
     }
@@ -68,6 +72,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
         ImageView photos;
         TextView price, name;
+
 
         public PopularProductViewHolder(@NonNull View itemView) {
             super(itemView);
