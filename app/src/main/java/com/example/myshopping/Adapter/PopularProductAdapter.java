@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myshopping.Model.Cart_item;
 import com.example.myshopping.R;
 import com.example.myshopping.Activity.DetailsActivity;
 import com.example.myshopping.Model.Products;
@@ -52,7 +53,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
-                i.putExtra("id_prodcuts",popularProductList.get(position).getId_products());
+                i.putExtra("object",  new Cart_item(popularProductList.get(position)));
                 context.startActivity(i);
             }
         });
@@ -72,7 +73,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
         ImageView photos;
         TextView price, name;
-
+        ConstraintLayout popular_layout;
 
         public PopularProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +81,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
             photos = itemView.findViewById(R.id.product_image);
             price = itemView.findViewById(R.id.price);
             name = itemView.findViewById(R.id.name);
+            popular_layout=itemView.findViewById(R.id.popular_layout);
 
 
 

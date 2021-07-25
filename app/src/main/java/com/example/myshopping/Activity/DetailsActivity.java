@@ -2,6 +2,7 @@ package com.example.myshopping.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -48,12 +49,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void getBundle() {
 
-        // Lấy product bằng id trên firebase
-        // String id_products = getIntent().getStringExtra("id_products");
 
-        Products product = new Products("",  "Quán lung tung","Quần lót ",".........................",7.05,R.drawable.popularfood1);
 
-        object = new Cart_item(product);
+        object = (Cart_item) getIntent().getSerializableExtra("object");
 
         picItem.setImageResource(object.getProducts().getPhotos());
         itemNameTxt.setText(object.getProducts().getName());
@@ -84,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 object.setNumberInCart(numberOrder);
                 managementCart.insertItem(object);
+
             }
         });
     }
