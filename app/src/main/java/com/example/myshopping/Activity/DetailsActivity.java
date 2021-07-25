@@ -49,8 +49,6 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void getBundle() {
 
-
-
         object = (Cart_item) getIntent().getSerializableExtra("object");
 
         picItem.setImageResource(object.getProducts().getPhotos());

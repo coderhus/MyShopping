@@ -42,7 +42,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.title.setText(cartItems.get(position).getProducts().getName());
         holder.priceItem.setText(String.valueOf(cartItems.get(position).getProducts().getPrice()));
         holder.totalPriceItem.setText(String.valueOf(Math.round((cartItems.get(position).getProducts().getNumberInCart() * cartItems.get(position).getProducts().getPrice()) * 100.0) / 100.0));
-        holder.num.setText(String.valueOf(cartItems.get(position).getProducts().getNumberInCart()));
+        holder.num.setText(String.valueOf(cartItems.get(position).getNumberInCart()));
         holder.pic.setImageResource(cartItems.get(position).getProducts().getPhotos());
 
         holder.minusItem.setOnClickListener(new View.OnClickListener() {
