@@ -18,6 +18,7 @@ public class ManagementCart {
     private TinyDB tinyDB;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef1 = database.getReference("Cart").child(user.getUid());
     DatabaseReference myRef = database.getReference("Cart").child(user.getUid()).child("list_Products");
     public ManagementCart(Context context) {
         this.context = context;
@@ -63,6 +64,8 @@ public class ManagementCart {
     public void MinusNumerFood(ArrayList<Products> cartItems, int position, ChangeNumberItemsListener changeNumberItemsListener) {
         Products temp = cartItems.get(position);
         if (temp.getQuanity() == 1) {
+            int count = cartItems.size();
+            myRef1.child("count").setValue(count-1);
             myRef.child(temp.getId_products()).setValue(null);
             cartItems.remove(position);
         } else {

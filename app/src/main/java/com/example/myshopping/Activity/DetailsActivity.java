@@ -127,6 +127,7 @@ public class    DetailsActivity extends AppCompatActivity {
                     else{
                         get.addProduct(product);
                     }
+                    get.setCount(get.getList_Products().size());
                     myRef.setValue(get);
                 }
                 Toast.makeText(DetailsActivity.this, "Added To Your Card", Toast.LENGTH_SHORT).show();

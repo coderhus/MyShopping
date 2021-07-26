@@ -55,7 +55,6 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
-
                     if(postsnap!=null){
                     Products a = postsnap.getValue(Products.class);
                     managementCart.insertItem(a);
