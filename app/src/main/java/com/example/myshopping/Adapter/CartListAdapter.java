@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myshopping.Model.Cart_item;
+import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
 import com.example.myshopping.R;
@@ -17,12 +18,12 @@ import java.util.ArrayList;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
 
-    private ArrayList<Cart_item> cartItems;
+    private ArrayList<Products> cartItems;
     private ManagementCart managementCart;
     private ChangeNumberItemsListener changeNumberItemsListener;
 
 
-    public CartListAdapter(ArrayList<Cart_item> cartItems, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
+    public CartListAdapter(ArrayList<Products> cartItems, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
 
         this.cartItems = cartItems;
         managementCart = new ManagementCart(context);
@@ -39,11 +40,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.title.setText(cartItems.get(position).getProducts().getName());
-        holder.priceItem.setText(String.valueOf(cartItems.get(position).getProducts().getPrice()));
-        holder.totalPriceItem.setText(String.valueOf(Math.round((cartItems.get(position).getProducts().getNumberInCart() * cartItems.get(position).getProducts().getPrice()) * 100.0) / 100.0));
-        holder.num.setText(String.valueOf(cartItems.get(position).getNumberInCart()));
-        holder.pic.setImageResource(cartItems.get(position).getProducts().getPhotos());
+        holder.title.setText(cartItems.get(position).getName());
+        holder.priceItem.setText(String.valueOf(cartItems.get(position).getPrice()));
+        holder.totalPriceItem.setText(String.valueOf(Math.round((cartItems.get(position).getQuanity() * cartItems.get(position).getPrice()) * 100.0) / 100.0));
+        holder.num.setText(String.valueOf(cartItems.get(position).getQuanity()));
+        holder.pic.setImageResource(cartItems.get(position).getPhotos());
 
         holder.minusItem.setOnClickListener(new View.OnClickListener() {
             @Override

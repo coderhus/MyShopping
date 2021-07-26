@@ -14,9 +14,9 @@ public class Voucher {
     }
 
     public Voucher(String id_voucher, List<String> id_category, double discount) {
-        this.id_voucher = id_voucher;
+       /** this.id_voucher = id_voucher;
         this.id_category = id_category;
-        this.discount = discount;
+        this.discount = discount; **/
     }
 
     public String getId_voucher() {

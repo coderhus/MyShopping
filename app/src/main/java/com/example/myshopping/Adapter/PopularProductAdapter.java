@@ -53,7 +53,7 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
-                i.putExtra("object",  new Cart_item(popularProductList.get(position)));
+                i.putExtra("object",  popularProductList.get(position));
                 context.startActivity(i);
             }
         });

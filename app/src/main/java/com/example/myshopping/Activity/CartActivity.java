@@ -13,16 +13,28 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.myshopping.Model.Cart_item;
+import com.example.myshopping.Model.Category;
+import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
 import com.example.myshopping.R;
 import com.example.myshopping.Adapter.CartListAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Cart").child(user.getUid()).child("list_Products");
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewList;
@@ -39,7 +51,23 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         managementCart = new ManagementCart(this);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
 
+                    if(postsnap!=null){
+                    Products a = postsnap.getValue(Products.class);
+                    managementCart.insertItem(a);
+                }
+                //
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         AnhXa();
 
         initList();

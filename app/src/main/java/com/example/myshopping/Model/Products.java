@@ -8,19 +8,31 @@ public class Products implements Serializable {
     private String name;
     private String describe;
     private double price;
+    private int quanity;
     private Integer photos;
 
     public Products(){
 
     }
-    public Products(String id_products, String id_seller, String name, String describe, double price, int photos) {
+
+    public Products(String id_products, String id_seller, String name, String describe, double price, int quanity, Integer photos) {
         this.id_products = id_products;
         this.id_seller = id_seller;
         this.name = name;
         this.describe = describe;
         this.price = price;
+        this.quanity = quanity;
         this.photos = photos;
+    }
+    public void addQuanity(int quanity){
+        this.quanity+=quanity;
+    }
+    public int getQuanity() {
+        return quanity;
+    }
 
+    public void setQuanity(int quanity) {
+        this.quanity = quanity;
     }
 
     public String getId_products() {
@@ -71,10 +83,6 @@ public class Products implements Serializable {
         return photos;
     }
 
-
-    public int getNumberInCart() {
-        return 1;
-    }
 
 
 }

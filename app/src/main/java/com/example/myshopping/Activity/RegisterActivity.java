@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myshopping.Model.Cart;
+import com.example.myshopping.Model.Products;
 import com.example.myshopping.R;
 import com.example.myshopping.Model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,10 +26,13 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Users");
+    DatabaseReference myRef = database.getReference();
     EditText username,gmail,inputPW, inputCPW;
     Button register;
     //TextView alreadyHaveAccount;
@@ -155,11 +160,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void pushInfotoDatabase(String mail){
+        //tạo database của users
         String name = username.getText().toString();
         String id = mAuth.getUid();
         final String timecreate =  String.valueOf(System.currentTimeMillis());
         Users user = new Users(id,name,timecreate,mail);
-        myRef.child(id).setValue(user);
+        myRef.child("Users").child(id).setValue(user);
+        // tạo database của cart ->id users(Xét mặc định là 0)
+
+        Cart a = new Cart(id,0,null);
+        myRef.child("Cart").child(id).setValue(a);
     }
 
     private void AnhXa() {

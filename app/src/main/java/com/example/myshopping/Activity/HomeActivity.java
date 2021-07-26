@@ -65,25 +65,24 @@ public class HomeActivity extends AppCompatActivity {
         //
         List<Products> popularProductList = new ArrayList<>();
 
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        popularProductList.add(new Products("",  ""," ","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        popularProductList.add(new Products("4_2",  "Friends Restaurant","Cá rán ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
 
         setPopularRecycler(popularProductList);
 
         //
 
         List<Products> categoryProductList = new ArrayList<>();
+        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
 
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4.2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,R.drawable.popularfood1));
+
 
         setAsiaRecycler(categoryProductList);
 
