@@ -5,6 +5,10 @@ import android.widget.Toast;
 
 import com.example.myshopping.Model.Cart_item;
 import com.example.myshopping.Model.Products;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.ArrayList;
@@ -12,7 +16,9 @@ import java.util.ArrayList;
 public class ManagementCart {
     private Context context;
     private TinyDB tinyDB;
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Cart").child(user.getUid()).child("list_Products");
     public ManagementCart(Context context) {
         this.context = context;
         this.tinyDB = new TinyDB(context);
@@ -46,17 +52,25 @@ public class ManagementCart {
     }
 
     public void plusNumberFood(ArrayList<Products> cartItems, int position, ChangeNumberItemsListener changeNumberItemsListener) {
-        cartItems.get(position).setQuanity(cartItems.get(position).getQuanity() + 1);
+        Products temp = cartItems.get(position);
+        temp.addQuanity(1);
+        cartItems.get(position).setQuanity(temp.getQuanity());
+        myRef.child(temp.getId_products()).setValue(temp);
         tinyDB.putListObject("CardList", cartItems);
         changeNumberItemsListener.changed();
     }
 
     public void MinusNumerFood(ArrayList<Products> cartItems, int position, ChangeNumberItemsListener changeNumberItemsListener) {
-        if (cartItems.get(position).getQuanity() == 1) {
+        Products temp = cartItems.get(position);
+        if (temp.getQuanity() == 1) {
+            myRef.child(temp.getId_products()).setValue(null);
             cartItems.remove(position);
         } else {
-            cartItems.get(position).setQuanity(cartItems.get(position).getQuanity() - 1);
+            temp.addQuanity(-1);
+            cartItems.get(position).setQuanity(temp.getQuanity());
+            myRef.child(cartItems.get(position).getId_products()).setValue(temp);
         }
+
         tinyDB.putListObject("CardList", cartItems);
         changeNumberItemsListener.changed();
     }
