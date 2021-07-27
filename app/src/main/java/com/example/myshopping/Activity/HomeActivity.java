@@ -11,12 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myshopping.Model.Cart;
 import com.example.myshopping.R;
 import com.example.myshopping.Adapter.CategoryAdapter;
 import com.example.myshopping.Adapter.CategoryProductAdapter;
 import com.example.myshopping.Adapter.PopularProductAdapter;
 import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Products;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -142,6 +144,20 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+        //thêm số lượng hàng ở cart, có thể thêm thông báo về sau
+        DatabaseReference myRef1 = database.getReference("Cart").child(user.getUid());
+        myRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                Cart a = snapshot.getValue(Cart.class);
+                bottomNavigationView.getOrCreateBadge(R.id.nav_cart).setNumber(a.getCount());
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
             }
         });
     }
