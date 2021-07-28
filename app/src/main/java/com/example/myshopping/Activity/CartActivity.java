@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.myshopping.Model.Cart_item;
-import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
@@ -27,9 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -101,7 +96,7 @@ public class CartActivity extends AppCompatActivity {
                     case R.id.nav_cart:
                         break;
                     case R.id.nav_notifications:
-                        startActivity(new Intent(getApplicationContext(),NofiticationActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_chat:

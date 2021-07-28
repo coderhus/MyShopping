@@ -9,6 +9,7 @@ public class Users {
     private int gender;
     private String birtday; // có thể đổi sang định dạng Date
     private String photo; // link ảnh photo up trên storage
+    private String token;
     public Users(){
 
     }
@@ -30,6 +31,14 @@ public class Users {
         this.gender = gender;
         this.birtday = birtday;
         this.photo = photo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getId() {

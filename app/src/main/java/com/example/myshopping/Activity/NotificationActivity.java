@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.myshopping.R;
 
-public class NofiticationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
