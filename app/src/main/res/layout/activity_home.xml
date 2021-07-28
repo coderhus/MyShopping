@@ -26,7 +26,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
-
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_settings" />
@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText"
-        app:srcCompat="@drawable/ic_short" />
+        app:srcCompat="@drawable/ic_wallet" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

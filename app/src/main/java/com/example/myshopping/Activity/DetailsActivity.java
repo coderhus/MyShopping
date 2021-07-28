@@ -98,7 +98,7 @@ public class    DetailsActivity extends AppCompatActivity {
                 addCart(object);
                 // còn phải trừ quanity của product nữa nhưng chưa có database products
                 //object.setNumberInCart(numberOrder);
-                //managementCart.insertItem(object);
+//                managementCart.insertItem(object);
 
             }
         });
@@ -130,6 +130,7 @@ public class    DetailsActivity extends AppCompatActivity {
                     get.setCount(get.getList_Products().size());
                     myRef.setValue(get);
                 }
+
                 Toast.makeText(DetailsActivity.this, "Added To Your Card", Toast.LENGTH_SHORT).show();
             }
 

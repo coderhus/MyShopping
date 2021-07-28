@@ -60,16 +60,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home) ;
 
         //
-        if(user == null ) {
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
 
         AnhXa();
         bottomNavigationView();
         initList();
         function();
     }
+
     //update token
     private void updateToken(){
         FirebaseMessaging.getInstance().getToken()
@@ -89,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void initList() {
         //
         List<Products> popularProductList = new ArrayList<>();
@@ -166,6 +164,10 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_chat:
                         startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.nav_person:
+                        startActivity(new Intent(getApplicationContext(),PersonActivity.class));
                         overridePendingTransition(0,0);
                         break;
                 }

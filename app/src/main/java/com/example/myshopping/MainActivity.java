@@ -12,9 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "MyActivity";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private static final String TAG = "MyActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
-
+                //  Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                //  startActivity(intent);
             }
         }.start();
     }

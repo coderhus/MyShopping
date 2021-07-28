@@ -103,6 +103,10 @@ public class CartActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),ChatActivity.class));
                         overridePendingTransition(0,0);
                         break;
+                    case R.id.nav_person:
+                        startActivity(new Intent(getApplicationContext(),PersonActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
                 }
                 return false;
             }
