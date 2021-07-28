@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -31,13 +34,35 @@ import java.util.Map;
 public class ChatActivity extends AppCompatActivity {
     SupportCode sp = new SupportCode();
     private String hisID, hisImage, myID, chatID = null, myImage, myName, audioPath;
+    private TextView tangduy,minhdung;
+    private EditText title,message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        getToken("alo","LUcIR7GIqjXdzZlQ3FQXsh4qWXy2","https://firebasestorage.googleapis.com/v0/b/myshopping-ee0cb.appspot.com/o/Category_photo%2FCategory_item%2FGi%C3%A0y%20d%C3%A9p%20n%E1%BB%AF.png?alt=media&token=7d8e73e8-70bd-431e-8e4d-06bf1402a50a","1");
+        Anhxa();
+       String id_usercuaDuy = "LUcIR7GIqjXdzZlQ3FQXsh4qWXy2";
+       String id_usercuaDung = "rK4hDFjvxTfL7paIfexrcx1Q71x1";
+        tangduy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getToken(title.getText().toString(),message.getText().toString(),id_usercuaDuy,null,null);
+            }
+        });
+        minhdung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getToken(title.getText().toString(),message.getText().toString(),id_usercuaDung,null,null);
+            }
+        });
     }
-    private void getToken(String message, String hisID,String hisImage,String chatID){
+    private void Anhxa(){
+        tangduy = findViewById(R.id.guichoTangDuy);
+        minhdung = findViewById(R.id.guichoMinhDung);
+        title = findViewById(R.id.textlagi);
+        message = findViewById(R.id.messagelagi);
+    }
+    private void getToken(String title,String message, String hisID,String hisImage,String chatID){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(hisID);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,7 +76,7 @@ public class ChatActivity extends AppCompatActivity {
 //                    data.put("hisID", myID);
 //                    data.put("hisImage", myImage);
 //                    data.put("chatID", chatID);
-                    data.put("title", "duy");
+                    data.put("title",title );
                     data.put("message", message);
                     data.put("hisID", sp.getUID());
                     data.put("hisImage", hisImage);

@@ -6,8 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ChatActivity">
 
+    <TextView
+        android:id="@+id/guichoTangDuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="122dp"
+        android:text="Gửi cho Tăng Duy"
+        android:textAlignment="center"
+        android:textColor="@color/colorButton"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textlagi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/guichoMinhDung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Gửi cho Minh Dũng"
+        android:textAlignment="center"
+        android:textColor="@color/colorButton"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textlagi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textlagi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="59dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableEnd="@drawable/user_icon"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="Nhập title"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:textColor="@color/colorTextBlack"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toTopOf="@+id/messagelagi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guichoTangDuy" />
+
+    <EditText
+        android:id="@+id/messagelagi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="419dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableEnd="@drawable/lock_icon"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="Nhập message"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:textColor="@color/colorTextBlack"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textlagi" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="0dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
