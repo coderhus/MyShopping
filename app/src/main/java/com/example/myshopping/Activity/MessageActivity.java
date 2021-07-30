@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.myshopping.Adapter.ChatAdapter;
@@ -62,7 +64,12 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = msgText.getText().toString();
-                sendMessage(msg);
+                if(msg.equals("")){
+                    Toast.makeText(MessageActivity.this,"Tin nhắn không được để trống",Toast.LENGTH_SHORT);
+                }
+                else{
+                    sendMessage(msg);
+                }
                 msgText.setText("");
             }
         });
@@ -176,6 +183,7 @@ public class MessageActivity extends AppCompatActivity {
         chat_view = findViewById(R.id.recyclerviewofspecific);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         chat_view.setLayoutManager(layoutManager);
+        chat_view.scrollToPosition(MessageList.size() - 1);
         adapter = new ChatAdapter(this, MessageList);
         chat_view.setAdapter(adapter);
 
