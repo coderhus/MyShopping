@@ -23,8 +23,6 @@ public class SupportCode {
         if (time > now || time <= 0) {
             return null;
         }
-
-
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
             return "just now";

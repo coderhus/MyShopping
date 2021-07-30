@@ -105,11 +105,13 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewofspecific"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/getmessage"
-        android:id="@+id/recyclerviewofspecific"
         android:layout_below="@id/toolbarofspecificchat"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="3dp"
         android:padding="5dp">
 
     </androidx.recyclerview.widget.RecyclerView>

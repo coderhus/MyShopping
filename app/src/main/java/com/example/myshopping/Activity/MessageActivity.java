@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.myshopping.Adapter.ChatAdapter;
 import com.example.myshopping.Model.Chat;
 import com.example.myshopping.Model.Messages;
@@ -41,7 +42,7 @@ public class MessageActivity extends AppCompatActivity {
     private Permissions permissions;
     TextView hisNametext;
     EditText msgText;
-    ImageView btnDataSend,msgBack,msgInfo;
+    ImageView btnDataSend,msgBack,msgInfo,specificuserimageinimageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MessageActivity extends AppCompatActivity {
         hisImage = getIntent().getStringExtra("hisImage");
         hisName = getIntent().getStringExtra("name");
         hisID = getIntent().getStringExtra("hisID");
+        Glide.with(MessageActivity.this).load(hisImage).into(specificuserimageinimageview);
         hisNametext.setText(hisName);
         // xét onclick
         //nút gửi
@@ -72,23 +74,24 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
         // nút info shop
-        msgInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // vào trang chủ của shop đó
-            }
-        });
+//        msgInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // vào trang chủ của shop đó
+//            }
+//        });
         // doc mess
         if(chatID!=null){
             readMessages(chatID);
         }
     }
     public void Anhxa(){
-        hisNametext = findViewById(R.id.nameChattext);
-        msgText = findViewById(R.id.msgText);
-        btnDataSend =findViewById(R.id.btnDataSend);
-        msgBack = findViewById(R.id.msgBack);
-        msgInfo =findViewById(R.id.msgInfo);
+        hisNametext = findViewById(R.id.Nameofspecificuser);
+        msgText = findViewById(R.id.getmessage);
+        btnDataSend =findViewById(R.id.imageviewsendmessage);
+        msgBack = findViewById(R.id.backbuttonofspecificchat);
+//        msgInfo =findViewById(R.id.msgInfo);
+        specificuserimageinimageview=findViewById(R.id.specificuserimageinimageview);
     }
     private void createChat(String msg) {
         Long tsLong = System.currentTimeMillis()/1000;
@@ -170,7 +173,7 @@ public class MessageActivity extends AppCompatActivity {
     }
     private void setchatRecycle(List<Messages> MessageList) {
 
-        chat_view = findViewById(R.id.MessAdapter);
+        chat_view = findViewById(R.id.recyclerviewofspecific);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         chat_view.setLayoutManager(layoutManager);
         adapter = new ChatAdapter(this, MessageList);
