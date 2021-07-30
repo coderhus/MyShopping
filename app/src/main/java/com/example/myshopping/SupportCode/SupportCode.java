@@ -47,5 +47,12 @@ public class SupportCode {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth.getUid();
     }
+    public String currentData() {
+        Calendar calendar = Calendar.getInstance();
+        return sdf().format(calendar.getTimeInMillis());
+    }
 
+    public static SimpleDateFormat sdf() {
+        return new SimpleDateFormat("yyyy-MM-dd hh-mm-ss a", Locale.US);
+    }
 }

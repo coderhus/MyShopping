@@ -2,6 +2,8 @@ package com.example.myshopping.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +17,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myshopping.Adapter.CategoryProductAdapter;
+import com.example.myshopping.Adapter.DialogAdapter;
 import com.example.myshopping.Constants.Constants;
+import com.example.myshopping.Model.Category;
+import com.example.myshopping.Model.Chat;
+import com.example.myshopping.Model.Products;
+import com.example.myshopping.Model.Users;
 import com.example.myshopping.Nofication.NoficationService;
 import com.example.myshopping.R;
 import com.example.myshopping.SupportCode.SupportCode;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +37,15 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
+    RecyclerView dialog;
+    DialogAdapter adapter;
+    BottomNavigationView bottomNavigationView;
     SupportCode sp = new SupportCode();
     private String hisID, hisImage, myID, chatID = null, myImage, myName, audioPath;
     private TextView tangduy,minhdung;
@@ -41,26 +55,41 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Anhxa();
-       String id_usercuaDuy = "LUcIR7GIqjXdzZlQ3FQXsh4qWXy2";
-       String id_usercuaDung = "rK4hDFjvxTfL7paIfexrcx1Q71x1";
-        tangduy.setOnClickListener(new View.OnClickListener() {
+        List<Chat> chatList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("ChatList").child(sp.getUID()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                getToken(title.getText().toString(),message.getText().toString(),id_usercuaDuy,null,null);
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                chatList.clear();
+                for (DataSnapshot postsnap: snapshot.getChildren()) {
+                    Chat a = postsnap.getValue(Chat.class);
+                    chatList.add(a);
+                }
+                //
+                if(!chatList.isEmpty()){
+                    setchatRecycle(chatList);
+                }
             }
-        });
-        minhdung.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                getToken(title.getText().toString(),message.getText().toString(),id_usercuaDung,null,null);
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
+    private void setchatRecycle(List<Chat> chatList) {
+
+        dialog = findViewById(R.id.recyclerViewChat);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        dialog.setLayoutManager(layoutManager);
+        adapter = new DialogAdapter(this, chatList);
+        dialog.setAdapter(adapter);
+
+    }
     private void Anhxa(){
-        tangduy = findViewById(R.id.guichoTangDuy);
-        minhdung = findViewById(R.id.guichoMinhDung);
-        title = findViewById(R.id.textlagi);
-        message = findViewById(R.id.messagelagi);
+//        tangduy = findViewById(R.id.guichoTangDuy);
+//        minhdung = findViewById(R.id.guichoMinhDung);
+//        title = findViewById(R.id.textlagi);
+//        message = findViewById(R.id.messagelagi);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
     private void getToken(String title,String message, String hisID,String hisImage,String chatID){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(hisID);

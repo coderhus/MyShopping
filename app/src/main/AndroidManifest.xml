@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.PushActivity"></activity>
+        <activity android:name=".Activity.MessageActivity"></activity>
+        <activity android:name=".Activity.PushActivity" />
         <activity android:name=".Activity.PersonActivity" />
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.ChatActivity" />

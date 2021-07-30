@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                         String token = task.getResult();
                         NoficationService a = new NoficationService();
                         a.onNewToken(token);
-                       // Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MessageActivity">
+    <include layout="@layout/message_toolbar"
+        android:id="@+id/toolbarmes"
+        ></include>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MessAdapter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarmes"
+        android:layout_above="@id/messageLayout"
+        ></androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/messageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1.8"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/btnadd"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_add" />
+
+        <EditText
+            android:id="@+id/msgText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/message_edittext_background"
+            android:hint="Write message.."
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
+        <ImageView
+            android:id="@+id/btnDataSend"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_send" />
+    </LinearLayout>
+</RelativeLayout>
