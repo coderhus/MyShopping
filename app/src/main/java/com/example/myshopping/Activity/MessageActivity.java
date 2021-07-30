@@ -13,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myshopping.Adapter.ChatAdapter;
-import com.example.myshopping.Adapter.DialogAdapter;
 import com.example.myshopping.Model.Chat;
-import com.example.myshopping.Model.MessageModel;
+import com.example.myshopping.Model.Messages;
 import com.example.myshopping.Model.Users;
 import com.example.myshopping.R;
 import com.example.myshopping.SupportCode.SupportCode;
@@ -43,6 +42,7 @@ public class MessageActivity extends AppCompatActivity {
     TextView hisNametext;
     EditText msgText;
     ImageView btnDataSend,msgBack,msgInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
 
         //
         databaseReference = FirebaseDatabase.getInstance().getReference("Chat").child(time);
-        MessageModel messageModel = new MessageModel(time,myID,hisID,msg,time,"text");
+        Messages messageModel = new Messages(time,myID,hisID,msg,time,"text");
         databaseReference.push().setValue(messageModel);
     }
 
@@ -124,7 +124,7 @@ public class MessageActivity extends AppCompatActivity {
         } else {
             Long tsLong = System.currentTimeMillis()/1000;
             String date = tsLong.toString();
-            MessageModel messageModel = new MessageModel(chatID,myID, hisID, msg, date, "text");
+            Messages messageModel = new Messages(chatID,myID, hisID, msg, date, "text");
             databaseReference = FirebaseDatabase.getInstance().getReference("Chat").child(chatID);
             databaseReference.push().setValue(messageModel);
 
@@ -143,7 +143,7 @@ public class MessageActivity extends AppCompatActivity {
         }
     }
     private void readMessages(String chatID) {
-        List<MessageModel> messList = new ArrayList<>();
+        List<Messages> messList = new ArrayList<>();
         Query query = FirebaseDatabase
                 .getInstance().getReference().child("Chat")
                 .child(chatID);
@@ -153,7 +153,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull  DataSnapshot snapshot) {
                 messList.clear();
                 for (DataSnapshot postsnap: snapshot.getChildren()) {
-                    MessageModel a = postsnap.getValue(MessageModel.class);
+                    Messages a = postsnap.getValue(Messages.class);
                     messList.add(a);
                 }
                 //
@@ -168,7 +168,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
-    private void setchatRecycle(List<MessageModel> MessageList) {
+    private void setchatRecycle(List<Messages> MessageList) {
 
         chat_view = findViewById(R.id.MessAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

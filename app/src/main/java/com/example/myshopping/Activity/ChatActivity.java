@@ -77,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
     }
     private void setchatRecycle(List<Chat> chatList) {
 
-        dialog = findViewById(R.id.recyclerViewChat);
+        dialog = findViewById(R.id.recyclerview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         dialog.setLayoutManager(layoutManager);
         adapter = new DialogAdapter(this, chatList);

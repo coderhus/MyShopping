@@ -1,11 +1,11 @@
 package com.example.myshopping.Model;
 
-public class MessageModel {
+public class Messages {
         String chatid,sender, receiver, message, date, type;
-        public MessageModel() {
+        public Messages() {
         }
 
-    public MessageModel(String chatid, String sender, String receiver, String message, String date, String type) {
+    public Messages(String chatid, String sender, String receiver, String message, String date, String type) {
         this.chatid = chatid;
         this.sender = sender;
         this.receiver = receiver;
