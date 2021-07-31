@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/timeofmessage"
-            android:textSize="10sp"
+            android:textSize="6sp"
             android:layout_toRightOf="@id/sendermessage"
             android:layout_marginLeft="-40dp"
             android:layout_alignBottom="@id/sendermessage"

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +43,12 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity {
 
 
-    RecyclerView popularRecycler, otherRecycler,categoryRecyclerView;
+    RecyclerView popularRecycler, otherRecycler,categoryRecyclerView, otherRecycler_2;
     PopularProductAdapter popularProductAdapter;
     CategoryProductAdapter categoryProductAdapter;
     CategoryAdapter categoryAdapter;
     TextView allCategory;
+    ScrollView scrollView;
     BottomNavigationView bottomNavigationView;
 
     //
@@ -136,6 +138,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void function(){
+        //
+        scrollView.setSmoothScrollingEnabled(false);
         //  allCategory
         allCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +198,8 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void AnhXa() {
+        scrollView =findViewById(R.id.scrollView);
+        otherRecycler_2 = (RecyclerView) findViewById(R.id.other_recycler_2);
         allCategory = (TextView) findViewById(R.id.allCategoryImage);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
@@ -233,5 +239,9 @@ public class HomeActivity extends AppCompatActivity {
         categoryProductAdapter = new  CategoryProductAdapter(this, categoryProductList);
         otherRecycler.setAdapter( categoryProductAdapter);
 
+
+        RecyclerView.LayoutManager layoutManager_2 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        otherRecycler_2.setLayoutManager(layoutManager_2);
+        otherRecycler_2.setAdapter( categoryProductAdapter);
     }
 }

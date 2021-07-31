@@ -58,6 +58,8 @@ public class PersonActivity extends AppCompatActivity {
             }
         });
         //
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        //
         sell_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
