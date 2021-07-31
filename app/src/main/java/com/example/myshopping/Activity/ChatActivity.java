@@ -85,10 +85,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     private void Anhxa(){
-//        tangduy = findViewById(R.id.guichoTangDuy);
-//        minhdung = findViewById(R.id.guichoMinhDung);
-//        title = findViewById(R.id.textlagi);
-//        message = findViewById(R.id.messagelagi);
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
     private void getToken(String title,String message, String hisID,String hisImage,String chatID){
@@ -100,11 +97,7 @@ public class ChatActivity extends AppCompatActivity {
                 JSONObject to = new JSONObject();
                 JSONObject data =new JSONObject();
                 try{
-//                    data.put("title", myName);
-//                    data.put("message", message);
-//                    data.put("hisID", myID);
-//                    data.put("hisImage", myImage);
-//                    data.put("chatID", chatID);
+
                     data.put("title",title );
                     data.put("message", message);
                     data.put("hisID", sp.getUID());

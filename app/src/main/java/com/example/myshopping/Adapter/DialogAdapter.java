@@ -21,7 +21,7 @@ import com.example.myshopping.Model.Category;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogViewHolder> {
 
@@ -66,7 +66,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
 
     public  static class DialogViewHolder extends RecyclerView.ViewHolder{
 
-        CircleImageView imagechat;
+        ImageView imagechat;
         TextView chatname,lastmsg;
         public DialogViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -33,33 +33,45 @@
             </ImageButton>
 
 
-            <androidx.cardview.widget.CardView
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="35dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:id="@+id/cardviewofspeficuser"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_toRightOf="@id/backbuttonofspecificchat"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                app:cardCornerRadius="35dp">-->
+
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/defaultprofile"-->
+<!--                    android:id="@+id/specificuserimageinimageview"-->
+<!--                    android:scaleType="centerCrop">-->
+
+<!--                </ImageView>-->
+
+
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/backbuttonofspecificchat"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:id="@+id/cardviewofspeficuser"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/backbuttonofspecificchat"
-                android:layout_centerVertical="true"
-                app:cardCornerRadius="35dp">
+                android:src="@drawable/profile"
+                android:id="@+id/specificuserimageinimageview"
+                android:scaleType="centerCrop">
 
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/defaultprofile"
-                    android:id="@+id/specificuserimageinimageview"
-                    android:scaleType="centerCrop">
-
-                </ImageView>
-
-
-
-            </androidx.cardview.widget.CardView>
+            </ImageView>
 
 
             <LinearLayout
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/cardviewofspeficuser"
+                android:layout_toRightOf="@id/specificuserimageinimageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:weightSum="10"
@@ -134,35 +146,50 @@
         android:id="@+id/getmessage" />
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:id="@+id/carviewofsendmessage"
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="45dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:id="@+id/carviewofsendmessage"-->
+<!--        android:layout_toRightOf="@id/getmessage"-->
+<!--        android:layout_marginLeft="-50dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:backgroundTint="#ECE5DD"-->
+<!--        -->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@drawable/bg_mess"-->
+<!--        >-->
+
+
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/message"-->
+<!--            android:padding="5dp"-->
+<!--            android:background="#ECE5DD"-->
+<!--            android:id="@+id/imageviewsendmessage"-->
+<!--            android:layout_gravity="center"-->
+<!--           />-->
+
+
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+
+    <ImageView
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/getmessage"
         android:layout_marginLeft="-50dp"
         android:layout_marginBottom="5dp"
-        android:backgroundTint="#0D8F80"
-        android:layout_alignParentBottom="true"
-        app:cardCornerRadius="45dp">
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/message"
+        android:padding="5dp"
+        android:background="#ECE5DD"
+        android:id="@+id/imageviewsendmessage"
+        android:layout_gravity="center"
+        />
 
 
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_arrow_forward_24"
-            android:padding="5dp"
-            android:backgroundTint="@color/purple_200"
-            android:background="@color/purple_200"
-            android:id="@+id/imageviewsendmessage"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            app:tint="@color/white">
-
-        </ImageButton>
-
-
-
-    </androidx.cardview.widget.CardView>
 
 
 

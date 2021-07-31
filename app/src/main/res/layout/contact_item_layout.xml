@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+       >
 
 
     <androidx.cardview.widget.CardView
@@ -13,55 +13,59 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         app:cardBackgroundColor="#f6f6f6"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/chatname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="17dp"
-                android:text="Tăng Duy"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/avatarChat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:elevation="10dp"
+                android:src="@drawable/profile" />
 
-            <TextView
-                android:id="@+id/lastmsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/chatname"
-                android:layout_alignStart="@+id/chatname"
-                android:layout_marginTop="8dp"
-                android:text="Tăng Duy"
-                android:textColor="#999DA4"
-                android:textSize="13dp"
-                android:textStyle="bold" />
 
-        </RelativeLayout>
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/chatname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Tăng Duy"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:padding="5dp"
+                    android:id="@+id/lastmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tăng Duy"
+                    android:textColor="#999DA4"
+                    android:textSize="13dp"
+                     />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatarChat"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignTop="@id/container"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="13dp"
-            android:elevation="10dp"
-            android:src="@drawable/profile" />
+
     </RelativeLayout>
