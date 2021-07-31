@@ -139,7 +139,6 @@ public class MessageActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Chat").child(time);
         Messages messageModel = new Messages(time,myID,hisID,msg,time,"text");
         databaseReference.push().setValue(messageModel);
-        getToken(msg,hisID,time);
     }
 
     private void sendMessage(String msg) {
