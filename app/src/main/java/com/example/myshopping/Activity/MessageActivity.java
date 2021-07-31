@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,8 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.myshopping.Adapter.ChatAdapter;
+import com.example.myshopping.Constants.Constants;
 import com.example.myshopping.Model.Chat;
 import com.example.myshopping.Model.Messages;
 import com.example.myshopping.Model.Users;
@@ -27,6 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.Permissions;
 import java.util.ArrayList;
@@ -52,6 +63,7 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         Anhxa();
         myID = sp.getUID();
+        sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         chatID = getIntent().getStringExtra("chatID");
         hisImage = getIntent().getStringExtra("hisImage");
         hisName = getIntent().getStringExtra("name");
@@ -69,7 +81,9 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 else{
                     sendMessage(msg);
+                    getToken(msg,hisID,chatID);
                 }
+
                 msgText.setText("");
             }
         });
@@ -125,6 +139,7 @@ public class MessageActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Chat").child(time);
         Messages messageModel = new Messages(time,myID,hisID,msg,time,"text");
         databaseReference.push().setValue(messageModel);
+        getToken(msg,hisID,time);
     }
 
     private void sendMessage(String msg) {
@@ -179,13 +194,87 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
     private void setchatRecycle(List<Messages> MessageList) {
-
         chat_view = findViewById(R.id.recyclerviewofspecific);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         chat_view.setLayoutManager(layoutManager);
         chat_view.scrollToPosition(MessageList.size() - 1);
         adapter = new ChatAdapter(this, MessageList);
         chat_view.setAdapter(adapter);
+    }
+    // gửi noti
+    private void getToken(String message, String hisID,String chatID){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(hisID);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                String token = snapshot.child("token").getValue().toString();
+                JSONObject to = new JSONObject();
+                JSONObject data =new JSONObject();
+               FirebaseDatabase.getInstance().getReference("Users").child(sp.getUID()).addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                       String name = snapshot.child("name").getValue().toString();
+                      //chua co
+                       String photo ="https://anhdep123.com/wp-content/uploads/2020/05/cho-con.jpg" ;
+                       String token = snapshot.child("token").getValue().toString();
+                       try{
+                           data.put("title",name );
+                           data.put("message", message);
+                           data.put("hisID", sp.getUID());
+                           data.put("hisImage",photo);
+                           data.put("chatID", chatID);
 
+                           to.put("to", token);
+                           to.put("data", data);
+
+                           sendNotification(to);
+
+                       } catch (JSONException e) {
+                           e.printStackTrace();
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void sendNotification(JSONObject to) {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.NOTIFICATION_URL, to, response -> {
+            Log.d("notification", "sendNotification: " + response);
+        }, error -> {
+            Log.d("notification", "sendNotification: " + error);
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", "key=" + Constants.SERVER_KEY);
+                map.put("Content-Type", "application/json");
+                return map;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        request.setRetryPolicy(new DefaultRetryPolicy(30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
     }
 }
