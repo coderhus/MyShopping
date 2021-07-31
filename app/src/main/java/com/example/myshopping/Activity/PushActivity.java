@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
 
 public class PushActivity extends AppCompatActivity {
 
@@ -35,5 +36,16 @@ public class PushActivity extends AppCompatActivity {
 
     private void AnhXa() {
         imageView_category =findViewById(R.id.imageView_category);
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }

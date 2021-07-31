@@ -9,6 +9,7 @@ public class Users {
     private int gender;
     private String birtday; // có thể đổi sang định dạng Date
     private String photo; // link ảnh photo up trên storage
+    private String online;
     private String token;
     public Users(){
 
@@ -31,6 +32,24 @@ public class Users {
         this.gender = gender;
         this.birtday = birtday;
         this.photo = photo;
+    }
+
+    public Users(String id, String name, String created_at, String gmail, String phone, String address, int gender, String birtday, String photo, String online, String token) {
+        this.id = id;
+        this.name = name;
+        this.created_at = created_at;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.birtday = birtday;
+        this.photo = photo;
+        this.online = online;
+        this.token = token;
+    }
+
+    public String getOnline() {
+        return online;
     }
 
     public String getToken() {

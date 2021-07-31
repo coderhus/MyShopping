@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MessageActivity extends AppCompatActivity {
     RecyclerView chat_view;
@@ -51,9 +52,8 @@ public class MessageActivity extends AppCompatActivity {
     private String hisID, hisImage,hisName, myID, chatID = null, myImage, myName, audioPath;
     private SupportCode sp = new SupportCode();
     private DatabaseReference databaseReference;
-    private SharedPreferences sharedPreferences;
     private Permissions permissions;
-    TextView hisNametext;
+    TextView hisNametext,status;
     EditText msgText;
     ImageView btnDataSend,msgBack,msgInfo,specificuserimageinimageview;
 
@@ -63,13 +63,13 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         Anhxa();
         myID = sp.getUID();
-        sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         chatID = getIntent().getStringExtra("chatID");
         hisImage = getIntent().getStringExtra("hisImage");
         hisName = getIntent().getStringExtra("name");
         hisID = getIntent().getStringExtra("hisID");
         Glide.with(MessageActivity.this).load(hisImage).into(specificuserimageinimageview);
         hisNametext.setText(hisName);
+        checkStatus(hisID);
         // xét onclick
         //nút gửi
         btnDataSend.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +81,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
                 else{
                     sendMessage(msg);
+                    if(!status.getText().toString().equals("Đang hoạt động"))
                     getToken(msg,hisID,chatID);
                 }
 
@@ -113,6 +114,7 @@ public class MessageActivity extends AppCompatActivity {
         msgBack = findViewById(R.id.backbuttonofspecificchat);
 //        msgInfo =findViewById(R.id.msgInfo);
         specificuserimageinimageview=findViewById(R.id.specificuserimageinimageview);
+        status = findViewById(R.id.trangthai);
     }
     private void createChat(String msg) {
         Long tsLong = System.currentTimeMillis()/1000;
@@ -274,5 +276,37 @@ public class MessageActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
+    }
+    private void checkStatus(String hisID) {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(hisID);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String online = Objects.requireNonNull(dataSnapshot.child("online").getValue()).toString();
+                    if(online.equals("online")) status.setText("Đang hoạt động");
+                    else{
+                        status.setText(SupportCode.getTimeAgo(Long.parseLong(online)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }

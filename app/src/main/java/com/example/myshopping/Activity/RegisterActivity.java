@@ -16,6 +16,7 @@ import com.example.myshopping.Model.Cart;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.R;
 import com.example.myshopping.Model.Users;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -179,5 +180,16 @@ public class RegisterActivity extends AppCompatActivity {
         gmail = findViewById(R.id.inputEmail);
         register = findViewById(R.id.btnRegister);
         // alreadyHaveAccount=findViewById(R.id.alreadyHaveAccount);
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }

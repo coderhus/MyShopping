@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.myshopping.Nofication.NoficationService;
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -109,5 +110,16 @@ public class LoginActivity extends AppCompatActivity {
         password_edt = (EditText) findViewById(R.id.password);
         gmail_login = findViewById(R.id.gmail_login);
         login = findViewById(R.id.login);
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }
