@@ -42,6 +42,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:overScrollMode="never"
         android:id="@+id/scrollView"
         android:layout_below="@id/appbar_push"
         android:layout_width="match_parent"

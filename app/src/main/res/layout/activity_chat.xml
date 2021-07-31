@@ -7,6 +7,7 @@
     tools:context=".Activity.ChatActivity">
 
     <ScrollView
+        android:overScrollMode="never"
         android:id="@+id/scrollView"
         android:scrollbars="vertical"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,6 +57,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
             android:layout_below="@id/appbar_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
