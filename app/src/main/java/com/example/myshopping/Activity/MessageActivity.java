@@ -216,7 +216,6 @@ public class MessageActivity extends AppCompatActivity {
                        String name = snapshot.child("name").getValue().toString();
                       //chua co
                        String photo ="https://anhdep123.com/wp-content/uploads/2020/05/cho-con.jpg" ;
-                       String token = snapshot.child("token").getValue().toString();
                        try{
                            data.put("title",name );
                            data.put("message", message);
@@ -226,7 +225,7 @@ public class MessageActivity extends AppCompatActivity {
 
                            to.put("to", token);
                            to.put("data", data);
-
+                           Toast.makeText(MessageActivity.this,token,Toast.LENGTH_SHORT).show();
                            sendNotification(to);
 
                        } catch (JSONException e) {

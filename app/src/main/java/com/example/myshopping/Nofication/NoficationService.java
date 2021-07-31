@@ -22,6 +22,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.myshopping.Activity.ChatActivity;
 import com.example.myshopping.Activity.DetailsActivity;
+import com.example.myshopping.Activity.MessageActivity;
 import com.example.myshopping.Activity.NotificationActivity;
 import com.example.myshopping.Constants.Constants;
 import com.example.myshopping.R;
@@ -97,7 +98,7 @@ public class NoficationService extends FirebaseMessagingService {
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSound(uri);
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra("chatID", chatID);
         intent.putExtra("hisID", hisID);
         intent.putExtra("hisImage", hisImage);
@@ -122,7 +123,7 @@ public class NoficationService extends FirebaseMessagingService {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra("hisID", hisID);
         intent.putExtra("hisImage", hisImage);
         intent.putExtra("chatID", chatID);

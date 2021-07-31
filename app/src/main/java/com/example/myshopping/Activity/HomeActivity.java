@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home) ;
 
         //
-
+        updateToken();
         AnhXa();
         bottomNavigationView();
         initList();
