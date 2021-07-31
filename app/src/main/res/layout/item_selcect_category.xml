@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:id="@+id/linear"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <ImageView
+            android:id="@+id/imageView"
+            android:src="@color/card_2"
+            android:layout_margin="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="Quần áo nam"
+            android:layout_weight="6"
+            android:layout_margin="8dp"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+        <ImageView
+            android:src="@drawable/ic_arrow_forward_blue"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"/>
+
+    </LinearLayout>
+
+
+
+    <View
+        android:background="@color/light_white"
+        android:layout_below="@id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+
+</RelativeLayout>
