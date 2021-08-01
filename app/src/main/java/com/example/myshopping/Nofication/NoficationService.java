@@ -117,6 +117,7 @@ public class NoficationService extends FirebaseMessagingService {
                 .setLargeIcon(theBitmap)
                 .setAutoCancel(true)
                 .setShowWhen(true)
+                .setDefaults(Notification.DEFAULT_SOUND)
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSound(uri);
 
@@ -164,12 +165,14 @@ public class NoficationService extends FirebaseMessagingService {
         intent.putExtra("name", title);
         intent.putExtra("chatID", chatID);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         Notification notification = new Notification.Builder(this, Constants.CHANNEL_ID)
                 .setShowWhen(true)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setLargeIcon(theBitmap)
+                .setDefaults(Notification.DEFAULT_SOUND)
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)

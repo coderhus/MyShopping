@@ -67,8 +67,8 @@ public class    DetailsActivity extends AppCompatActivity {
     private void getBundle() {
 
         object = (Products) getIntent().getSerializableExtra("object");
-
-        picItem.setImageResource(object.getPhotos());
+        Glide.with(this).load(object.getPhotos()).into(picItem);
+        //picItem.setImageResource(object.getPhotos());
         itemNameTxt.setText(object.getName());
         feeTxt.setText("$" + object.getPrice());
         descriptionTxt.setText(object.getDescribe());

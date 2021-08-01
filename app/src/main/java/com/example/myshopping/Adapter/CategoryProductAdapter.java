@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myshopping.R;
 import com.example.myshopping.Model.Products;
 
@@ -40,12 +41,13 @@ public class CategoryProductAdapter extends RecyclerView.Adapter<CategoryProduct
 
     @Override
     public void onBindViewHolder(CategoryProductViewHolder holder, int position) {
-
-        holder.photos.setImageResource(categoryProductList.get(position).getPhotos());
+        Glide.with(context).load(categoryProductList.get(position).getPhotos()).into(holder.photos);
+        //holder.photos.setImageResource(categoryProductList.get(position).getPhotos());
         holder.name.setText(categoryProductList.get(position).getName());
         holder.price.setText(String.valueOf(categoryProductList.get(position).getPrice()+"$"));
-        holder.rating.setText(categoryProductList.get(position).getId_products());
-        holder.restorantName.setText(categoryProductList.get(position).getId_seller());
+        //holder.rating.setText(categoryProductList.get(position).getId_products());
+        holder.rating.setText("5");
+        holder.restorantName.setText(categoryProductList.get(position).getName_seller());
 
     }
 

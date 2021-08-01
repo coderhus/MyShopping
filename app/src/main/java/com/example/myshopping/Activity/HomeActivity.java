@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Category");
+    DatabaseReference myRef1 = database.getReference("Products");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,26 +90,50 @@ public class HomeActivity extends AppCompatActivity {
     private void initList() {
         //
         List<Products> popularProductList = new ArrayList<>();
+        myRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                popularProductList.clear();
+                for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
+                    Products a = postsnap.getValue(Products.class);
+                   popularProductList.add(a);
+                }
+                //
+                if(!popularProductList.isEmpty()){
+                    setPopularRecycler(popularProductList);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        popularProductList.add(new Products("4_2",  "Friends Restaurant","Cá rán ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-
+            }
+        });
+//        popularProductList.add(new Products("4_1",  "Friends Restaurant","Straberry Cake ","Float Cake Vietnam",7.05,10,""));
+//
         setPopularRecycler(popularProductList);
 
         //
 
         List<Products> categoryProductList = new ArrayList<>();
-        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
-        categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,R.drawable.popularfood1));
+       // categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,""));
+        myRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                categoryProductList.clear();
+                for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
+                    Products a = postsnap.getValue(Products.class);
+                    categoryProductList.add(a);
+                }
+                //
+                if(!categoryProductList.isEmpty()){
+                    setAsiaRecycler(categoryProductList);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-
+            }
+        });
         setAsiaRecycler(categoryProductList);
 
         //
@@ -176,7 +201,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         //thêm số lượng hàng ở cart, có thể thêm thông báo về sau
-        DatabaseReference myRef1 = database.getReference("Cart").child(user.getUid());
+        DatabaseReference myRef1 = database.getReference("Cart").child(SupportCode.getUID());
         myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull  DataSnapshot snapshot) {

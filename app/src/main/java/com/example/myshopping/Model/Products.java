@@ -1,29 +1,43 @@
 package com.example.myshopping.Model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.Serializable;
 
 public class Products implements Serializable {
     private String id_products;
     private String id_seller;
     private String name;
+    private String name_seller;
     private String describe;
     private double price;
     private int quanity;
-    private Integer photos;
+    private String photos;
 
     public Products(){
 
     }
 
-    public Products(String id_products, String id_seller, String name, String describe, double price, int quanity, Integer photos) {
+    public Products(String id_products, String id_seller, String name, String name_seller, String describe, double price, int quanity, String photos) {
         this.id_products = id_products;
         this.id_seller = id_seller;
         this.name = name;
+        this.name_seller = name_seller;
         this.describe = describe;
         this.price = price;
         this.quanity = quanity;
         this.photos = photos;
     }
+
+    public String getName_seller() {
+        return name_seller;
+    }
+
+    public void setName_seller(String name_seller) {
+        this.name_seller = name_seller;
+    }
+
     public void addQuanity(int quanity){
         this.quanity+=quanity;
     }
@@ -75,14 +89,11 @@ public class Products implements Serializable {
         this.price = price;
     }
 
-    public void setPhotos(Integer photos) {
-        this.photos = photos;
-    }
-
-    public Integer getPhotos() {
+    public String getPhotos() {
         return photos;
     }
 
-
-
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
 }

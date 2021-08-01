@@ -1,6 +1,8 @@
 package com.example.myshopping.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myshopping.Activity.DetailsActivity;
+import com.example.myshopping.Activity.PushActivity;
 import com.example.myshopping.Model.Category;
 import com.example.myshopping.R;
 
@@ -43,6 +47,15 @@ public class SelectCategoryAdapter extends RecyclerView.Adapter<SelectCategoryAd
 //        if(cateName.length()>=14)
 //            cateName = cateName.substring(0,14)+"...";
         holder.categoryName.setText(cateName);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent=new Intent(context, PushActivity.class);
+                mIntent.putExtra("category", categoryList.get(position).getName());
+                context.startActivity(mIntent);
+                ((Activity) context).finish();
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.myshopping.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.myshopping.Model.Cart_item;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
@@ -44,8 +47,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.priceItem.setText(String.valueOf(cartItems.get(position).getPrice()));
         holder.totalPriceItem.setText(String.valueOf(Math.round((cartItems.get(position).getQuanity() * cartItems.get(position).getPrice()) * 100.0) / 100.0));
         holder.num.setText(String.valueOf(cartItems.get(position).getQuanity()));
-        holder.pic.setImageResource(cartItems.get(position).getPhotos());
-
+       // holder.pic.setImageResource(cartItems.get(position).getPhotos());
+        Glide.with(managementCart.getContext()).load(cartItems.get(position).getPhotos()).into(holder.pic);
         holder.minusItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

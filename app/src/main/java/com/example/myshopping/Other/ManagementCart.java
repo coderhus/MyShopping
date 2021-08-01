@@ -87,4 +87,11 @@ public class ManagementCart {
         return fee;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }

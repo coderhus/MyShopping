@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myshopping.Model.Cart_item;
 import com.example.myshopping.R;
 import com.example.myshopping.Activity.DetailsActivity;
@@ -44,8 +45,8 @@ public class PopularProductAdapter extends RecyclerView.Adapter<PopularProductAd
 
     @Override
     public void onBindViewHolder(@NonNull PopularProductViewHolder holder, int position) {
-
-        holder.photos.setImageResource(popularProductList.get(position).getPhotos());
+        Glide.with(context).load(popularProductList.get(position).getPhotos()).into(holder.photos);
+        //holder.photos.setImageResource(popularProductList.get(position).getPhotos());
         holder.name.setText(popularProductList.get(position).getName());
         holder.price.setText(String.valueOf(popularProductList.get(position).getPrice()+"$"));
 

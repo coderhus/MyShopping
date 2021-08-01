@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Cart {
-    private String id_user;
-    private int count; // đếm số lượng đồ trong giỏ hàng, có thể có hoặc k vì đếm đc theo
+    private int count;
+    private String id_user;// đếm số lượng đồ trong giỏ hàng, có thể có hoặc k vì đếm đc theo
     // list id_product ở dưới
     private HashMap<String, Products> list_Products = new HashMap<String, Products>();
   //  private List<Products> list_Products = new LinkedList<>();

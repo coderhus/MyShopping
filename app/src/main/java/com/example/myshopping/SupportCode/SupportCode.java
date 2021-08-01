@@ -1,14 +1,32 @@
 package com.example.myshopping.SupportCode;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Parcelable;
+import android.provider.MediaStore;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.example.myshopping.Constants.Constants;
+import com.example.myshopping.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -17,6 +35,10 @@ public class SupportCode {
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
+    private static final String TAG = "ImagePicker";
+    private static final String TEMP_IMAGE_NAME = "tempImage";
+    public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
     //hiển thị giờ chat
     public static String getTimeAgo(long time) {
         if (time < 1000000000000L) {
@@ -63,4 +85,5 @@ public class SupportCode {
         map.put("online", status);
         databaseReference.updateChildren(map);
     }
+
 }
