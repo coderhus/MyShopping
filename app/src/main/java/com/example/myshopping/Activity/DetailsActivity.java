@@ -18,6 +18,7 @@ import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ManagementCart;
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -142,5 +143,15 @@ public class    DetailsActivity extends AppCompatActivity {
         };
         myRef.addListenerForSingleValueEvent(postListener);
     }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
+    }
 }

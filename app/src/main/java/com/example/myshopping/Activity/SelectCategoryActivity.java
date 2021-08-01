@@ -13,6 +13,7 @@ import com.example.myshopping.Adapter.CategoryAdapter;
 import com.example.myshopping.Adapter.SelectCategoryAdapter;
 import com.example.myshopping.Model.Category;
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,6 +72,16 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
         categoryRecycler.setAdapter( categoryAdapter);
     }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
+    }
 
 }

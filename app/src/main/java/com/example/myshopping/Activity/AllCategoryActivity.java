@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.example.myshopping.R;
 import com.example.myshopping.Adapter.CategoryAdapter;
 import com.example.myshopping.Model.Category;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -127,5 +128,16 @@ public class AllCategoryActivity extends AppCompatActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }

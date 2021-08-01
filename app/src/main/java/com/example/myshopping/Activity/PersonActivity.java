@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.myshopping.Adapter.PagerPersonAdapter;
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -110,6 +111,16 @@ public class PersonActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
+    }
 
 }

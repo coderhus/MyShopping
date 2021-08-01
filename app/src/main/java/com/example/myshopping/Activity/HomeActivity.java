@@ -21,6 +21,7 @@ import com.example.myshopping.Adapter.CategoryProductAdapter;
 import com.example.myshopping.Adapter.PopularProductAdapter;
 import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Products;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home) ;
 
         //
-
+        updateToken();
         AnhXa();
         bottomNavigationView();
         initList();
@@ -239,5 +240,16 @@ public class HomeActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager_2 = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         otherRecycler_2.setLayoutManager(layoutManager_2);
         otherRecycler_2.setAdapter( categoryProductAdapter);
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }

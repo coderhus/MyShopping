@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -20,8 +21,10 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.myshopping.Activity.ChatActivity;
 import com.example.myshopping.Activity.DetailsActivity;
+import com.example.myshopping.Activity.MessageActivity;
 import com.example.myshopping.Activity.NotificationActivity;
 import com.example.myshopping.Constants.Constants;
 import com.example.myshopping.R;
@@ -41,6 +44,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class NoficationService extends FirebaseMessagingService {
     private SupportCode a = new SupportCode();
@@ -59,8 +63,15 @@ public class NoficationService extends FirebaseMessagingService {
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O)
                 createOreoNotification(title, message, hisID, hisImage, chatID);
-            else
-                createNormalNotification(title, message, hisID, hisImage, chatID);
+            else {
+                try {
+                    createNormalNotification(title, message, hisID, hisImage, chatID);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         } else Log.d("TAG", "onMessageReceived: no data ");
         super.onMessageReceived(remoteMessage);
     }
@@ -83,23 +94,36 @@ public class NoficationService extends FirebaseMessagingService {
         map.put("token",token);
         databaseReference.updateChildren(map);
     }
-    private void createNormalNotification(String title, String message, String hisID, String hisImage, String chatID) {
-
+    private void createNormalNotification(String title, String message, String hisID, String hisImage, String chatID) throws ExecutionException, InterruptedException {
+        Bitmap theBitmap = null;
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        try {
+            theBitmap = Glide.
+                    with(this).
+                    load(hisImage).
+                    asBitmap().
+                    into(-1,-1).
+                    get();
+        } catch (final ExecutionException e) {
 
+        } catch (final InterruptedException e) {
+
+        }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Constants.CHANNEL_ID);
         builder.setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setLargeIcon(theBitmap)
                 .setAutoCancel(true)
                 .setShowWhen(true)
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSound(uri);
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra("chatID", chatID);
         intent.putExtra("hisID", hisID);
+        intent.putExtra("name", title);
         intent.putExtra("hisImage", hisImage);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -112,7 +136,19 @@ public class NoficationService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createOreoNotification(String title, String message, String hisID, String hisImage, String chatID) {
+        Bitmap theBitmap = null;
+        try {
+            theBitmap = Glide.
+                    with(this).
+                    load(hisImage).
+                    asBitmap().
+                    into(-1,-1).
+                    get();
+        } catch (final ExecutionException e) {
 
+        } catch (final InterruptedException e) {
+
+        }
         NotificationChannel channel = new NotificationChannel(Constants.CHANNEL_ID, "Message", NotificationManager.IMPORTANCE_HIGH);
         channel.setShowBadge(true);
         channel.enableLights(true);
@@ -122,9 +158,10 @@ public class NoficationService extends FirebaseMessagingService {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra("hisID", hisID);
         intent.putExtra("hisImage", hisImage);
+        intent.putExtra("name", title);
         intent.putExtra("chatID", chatID);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -132,6 +169,7 @@ public class NoficationService extends FirebaseMessagingService {
                 .setShowWhen(true)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setLargeIcon(theBitmap)
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)

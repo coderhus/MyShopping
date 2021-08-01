@@ -17,6 +17,7 @@ import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
 import com.example.myshopping.R;
 import com.example.myshopping.Adapter.CartListAdapter;
+import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -149,5 +150,16 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         recyclerViewList.setAdapter(adapter);
+    }
+    @Override
+    protected void onResume() {
+        SupportCode.updateOnlineStatus("online");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
+        super.onPause();
     }
 }
