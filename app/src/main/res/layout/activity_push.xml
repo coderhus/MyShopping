@@ -190,6 +190,44 @@
 
             <View
                 android:layout_below="@+id/linear_4"
+                android:id="@+id/view5"
+                android:background="@color/light_white"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:id="@+id/linear_5"
+                android:weightSum="5"
+                android:layout_below="@id/view5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:drawablePadding="15dp"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/ic_baseline_exposure_24"
+                    android:text="Số lượng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:layout_weight="4"
+                    android:paddingLeft="10dp"
+                    android:hint="Đặt"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:layout_margin="10dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_below="@+id/linear_5"
                 android:id="@+id/viewfinal"
                 android:background="@color/light_white"
                 android:layout_width="match_parent"
