@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.myshopping.Model.Cart;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
@@ -91,21 +93,23 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        startActivity(new Intent(CartActivity.this,HomeActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_cart:
                         break;
                     case R.id.nav_notifications:
-                        startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+                        startActivity(new Intent(CartActivity.this, NotificationActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_chat:
-                        startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+                        startActivity(new Intent(CartActivity.this,ChatActivity.class));
+
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_person:
-                        startActivity(new Intent(getApplicationContext(),PersonActivity.class));
+                        startActivity(new Intent(CartActivity.this,PersonActivity.class));
+
                         overridePendingTransition(0,0);
                         break;
                 }

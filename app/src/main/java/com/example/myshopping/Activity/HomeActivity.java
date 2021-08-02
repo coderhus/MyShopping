@@ -181,19 +181,19 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         break;
                     case R.id.nav_cart:
-                        startActivity(new Intent(getApplicationContext(),CartActivity.class));
+                        startActivity(new Intent(HomeActivity.this,CartActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_notifications:
-                        startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+                        startActivity(new Intent(HomeActivity.this, NotificationActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_chat:
-                        startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+                        startActivity(new Intent(HomeActivity.this,ChatActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.nav_person:
-                        startActivity(new Intent(getApplicationContext(),PersonActivity.class));
+                        startActivity(new Intent(HomeActivity.this,PersonActivity.class));
                         overridePendingTransition(0,0);
                         break;
                 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -83,5 +84,14 @@ public class SelectCategoryActivity extends AppCompatActivity {
         SupportCode.updateOnlineStatus(String.valueOf(System.currentTimeMillis()));
         super.onPause();
     }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(SelectCategoryActivity.this, PushActivity.class);
+//        intent.putExtra("search", "");
+//        intent.putExtra("QueryType",QueryType);
+//        setResult(1, intent);
+//        finish();
+//        super.onBackPressed();
+//    }
 
 }

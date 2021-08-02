@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.myshopping.Adapter.CategoryProductAdapter;
 import com.example.myshopping.Adapter.DialogAdapter;
 import com.example.myshopping.Constants.Constants;
+import com.example.myshopping.Model.Cart;
 import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Chat;
 import com.example.myshopping.Model.Products;
@@ -55,6 +58,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Anhxa();
+        bottomNavigationView();
         List<Chat> chatList = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference("ChatList").child(sp.getUID()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,6 +78,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
     }
     private void setchatRecycle(List<Chat> chatList) {
 
@@ -87,6 +92,37 @@ public class ChatActivity extends AppCompatActivity {
     private void Anhxa(){
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+    }
+    private void bottomNavigationView() {
+        bottomNavigationView.setSelectedItemId(R.id.nav_chat);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_home:
+                        startActivity(new Intent(ChatActivity.this,HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.nav_cart:
+                        startActivity(new Intent(ChatActivity.this, CartActivity.class));
+
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.nav_notifications:
+                        startActivity(new Intent(ChatActivity.this, NotificationActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.nav_chat:
+                        break;
+                    case R.id.nav_person:
+                        startActivity(new Intent(ChatActivity.this,PersonActivity.class));
+
+                        overridePendingTransition(0,0);
+                        break;
+                }
+                return false;
+            }
+        });
     }
     @Override
     protected void onResume() {
