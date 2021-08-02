@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
                 popularProductList.clear();
                 for (DataSnapshot postsnap: dataSnapshot.getChildren()) {
                     Products a = postsnap.getValue(Products.class);
-                   popularProductList.add(a);
+                    popularProductList.add(a);
                 }
                 //
                 if(!popularProductList.isEmpty()){
@@ -115,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
         //
 
         List<Products> categoryProductList = new ArrayList<>();
-       // categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,""));
+        // categoryProductList.add(new Products("4_2", "Friends Restaurant","Straberry Cake","Float Cake Vietnam",7.05,10,""));
         myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

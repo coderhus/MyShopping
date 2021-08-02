@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myshopping.Model.Cart_item;
 import com.example.myshopping.R;
 import com.example.myshopping.Activity.DetailsActivity;
 import com.example.myshopping.Model.Products;
