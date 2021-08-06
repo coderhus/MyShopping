@@ -6,14 +6,20 @@ public class Notifications {
     private String description;
     private int type;
     private String id;
-    private  Integer photo;
+    private String photo;
 
-    public Notifications(String time, String description, int type, String id, Integer  photo) {
+    public Notifications() {
+    }
+
+    public Notifications(String time, String description, int type, String id, String photo) {
         this.time = time;
         this.description = description;
         this.type = type;
         this.id = id;
         this.photo = photo;
+    }
+
+    public Notifications(String time, String description, int type, String id, int profile) {
     }
 
     public String getTime() {
@@ -48,11 +54,11 @@ public class Notifications {
         this.id = id;
     }
 
-    public Integer  getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Integer photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 }

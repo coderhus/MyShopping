@@ -2,6 +2,7 @@ package com.example.myshopping.SupportCode;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,14 +11,21 @@ import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.myshopping.Constants.Constants;
+import com.example.myshopping.Model.Notifications;
+import com.example.myshopping.Model.Rate;
+import com.example.myshopping.Model.Users;
 import com.example.myshopping.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -39,6 +47,8 @@ public class SupportCode {
     private static final String TAG = "ImagePicker";
     private static final String TEMP_IMAGE_NAME = "tempImage";
     public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static DatabaseReference myRef = database.getReference("Users").child(SupportCode.getUID());
     //hiển thị giờ chat
     public static String getTimeAgo(long time) {
         if (time < 1000000000000L) {
@@ -84,6 +94,60 @@ public class SupportCode {
         Map<String, Object> map = new HashMap<>();
         map.put("online", status);
         databaseReference.updateChildren(map);
+    }
+    public static void addNotification(String hisID,String description,int type) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Notification").child(hisID);
+        Notifications notification = new Notifications();
+        notification.setId(getUID());
+        notification.setDescription(description);
+        notification.setTime(String.valueOf(System.currentTimeMillis()));
+        notification.setType(type);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Users user = dataSnapshot.getValue(Users.class);
+               notification.setPhoto(user.getPhoto());
+               databaseReference.child(notification.getTime()).setValue(notification);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public static void addRate(String productID,double rate){
+        // set rate ban daau
+        if(rate==-1){
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rate");
+            databaseReference.child(productID).setValue(new Rate());
+        }
+        else {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rate").child(productID);
+            databaseReference.child(getUID()).setValue(rate);
+            changeRate(productID, rate);
+        }
+    }
+    public static void changeRate(String productID,double rateadd){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rate").child(productID);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                Rate rate = snapshot.getValue(Rate.class);
+                rate.updateRate(rateadd);
+                Map<String, Object> map = new HashMap<>();
+                map.put("rate", rate.getRate());
+                map.put("count", rate.getCount());
+                databaseReference.updateChildren(map);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
+            }
+        });
     }
 
 }

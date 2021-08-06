@@ -8,7 +8,7 @@ public class Cart_item implements Serializable {
     private Products products;
     private int numberInCart;
     private int sale;
-
+    
 
     public Cart_item( Products products) {
         this.products = products;

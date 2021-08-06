@@ -44,9 +44,8 @@ public class NotifiAdapter extends RecyclerView.Adapter<NotifiAdapter.NotifiView
 
     @Override
     public void onBindViewHolder(@NonNull NotifiViewHolder holder, int position) {
-
-
-        holder.photos.setImageResource(notifiList.get(position).getPhoto());
+        Glide.with(context).load(notifiList.get(position).getPhoto()).into(holder.photos);
+        //holder.photos.setImageResource(notifiList.get(position).getPhoto());
         holder.time.setText(notifiList.get(position).getTime());
         holder.des.setText(String.valueOf(notifiList.get(position).getDescription()));
 

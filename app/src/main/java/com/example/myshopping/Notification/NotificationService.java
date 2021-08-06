@@ -1,4 +1,4 @@
-package com.example.myshopping.Nofication;
+package com.example.myshopping.Notification;
 
 
 import android.app.Notification;
@@ -8,24 +8,18 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.myshopping.Activity.ChatActivity;
-import com.example.myshopping.Activity.DetailsActivity;
 import com.example.myshopping.Activity.MessageActivity;
-import com.example.myshopping.Activity.NotificationActivity;
 import com.example.myshopping.Constants.Constants;
 import com.example.myshopping.R;
 import com.example.myshopping.SupportCode.SupportCode;
@@ -35,18 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.installations.InstallationTokenResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class NoficationService extends FirebaseMessagingService {
+public class NotificationService extends FirebaseMessagingService {
     private SupportCode a = new SupportCode();
 
     @Override

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myshopping.Model.Cart;
-import com.example.myshopping.Nofication.NoficationService;
+import com.example.myshopping.Notification.NotificationService;
 import com.example.myshopping.R;
 import com.example.myshopping.Adapter.CategoryAdapter;
 import com.example.myshopping.Adapter.CategoryProductAdapter;
@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-                        NoficationService a = new NoficationService();
+                        NotificationService a = new NotificationService();
                         a.onNewToken(token);
                         // Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
@@ -226,14 +226,15 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
     }
 
-    // thêm category lên firebase
-    /* private void addCategory(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Category");
-        String anh = "https://firebasestorage.googleapis.com/v0/b/myshopping-ee0cb.appspot.com/o/Category_photo%2FCategory_item%2FGi%C3%A0y%20d%C3%A9p%20nam.png?alt=media&token=c8acd6b7-4bff-4f7b-be05-0ffb91cbef01";
-        Category add = new Category( "Đồ chơi","",0,anh);
-        myRef.child(add.getId()).setValue(add);
-    }*/
+    // thêm category lên firebase dùng khi muốn up thêm 1 category nữa
+
+//     private void addCategory(){
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("Category");
+//        String anh = "https://firebasestorage.googleapis.com/v0/b/myshopping-ee0cb.appspot.com/o/Category_photo%2FCategory_item%2F%C4%90%E1%BB%93%20%C4%83n.png?alt=media&token=03726142-fe7e-4287-b8bb-9325bf7fe7f5";
+//        Category add = new Category( "Đồ ăn","",0,anh);
+//        myRef.child(add.getId()).setValue(add);
+//    }
 
     private void setCategoryRecycler(List<Category> categoryList) {
         categoryRecyclerView = findViewById(R.id.categoryRecycler);

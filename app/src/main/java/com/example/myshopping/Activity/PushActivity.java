@@ -155,6 +155,7 @@ public class PushActivity extends AppCompatActivity {
 
                 }
             });
+            SupportCode.addRate(time,-1);
         }
     }
     private void setText(){

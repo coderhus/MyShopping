@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".Nofication.NoficationService">
+            android:name=".Notification.NotificationService">
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

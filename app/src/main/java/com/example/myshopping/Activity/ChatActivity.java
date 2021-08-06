@@ -7,43 +7,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.myshopping.Adapter.CategoryProductAdapter;
 import com.example.myshopping.Adapter.DialogAdapter;
-import com.example.myshopping.Constants.Constants;
-import com.example.myshopping.Model.Cart;
-import com.example.myshopping.Model.Category;
 import com.example.myshopping.Model.Chat;
-import com.example.myshopping.Model.Products;
-import com.example.myshopping.Model.Users;
-import com.example.myshopping.Nofication.NoficationService;
 import com.example.myshopping.R;
 import com.example.myshopping.SupportCode.SupportCode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
     RecyclerView dialog;

@@ -35,7 +35,7 @@ public class    DetailsActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Cart").child(user.getUid());
-    private TextView itemNameTxt, feeTxt, descriptionTxt, numberOrderTxt;
+    private TextView itemNameTxt, feeTxt, descriptionTxt, numberOrderTxt,restaurantName_txt;
     private ImageView plusBtn, minusBtn, picItem, addToCardBtn;
     private Products object;
     private int numberOrder = 1;
@@ -57,7 +57,7 @@ public class    DetailsActivity extends AppCompatActivity {
         feeTxt = (TextView) findViewById(R.id.priceItem_txt);
         descriptionTxt = (TextView) findViewById(R.id.description);
         numberOrderTxt = (TextView) findViewById(R.id.numberOrderTxt);
-
+        restaurantName_txt = findViewById(R.id.restaurantName_txt);
         plusBtn = (ImageView) findViewById(R.id.plus_image);
         minusBtn = (ImageView) findViewById(R.id.minus_image);
         picItem = (ImageView) findViewById(R.id.photoImage);
@@ -73,11 +73,14 @@ public class    DetailsActivity extends AppCompatActivity {
         feeTxt.setText("$" + object.getPrice());
         descriptionTxt.setText(object.getDescribe());
         numberOrderTxt.setText(String.valueOf(numberOrder));
-
+        restaurantName_txt.setText(object.getName_seller());
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(numberOrder+1<=object.getQuanity())
                 numberOrder = numberOrder + 1;
+                else
+                    Toast.makeText(DetailsActivity.this, "Kho hàng không đủ!", Toast.LENGTH_SHORT).show();
                 numberOrderTxt.setText(String.valueOf(numberOrder));
             }
         });
@@ -95,8 +98,14 @@ public class    DetailsActivity extends AppCompatActivity {
         addToCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                object.setQuanity(numberOrder);
-                addCart(object);
+                if(numberOrder<=object.getQuanity()) {
+                    Products a = object;
+                    a.setQuanity(numberOrder);
+                    addCart(a);
+                }
+                else{
+                    Toast.makeText(DetailsActivity.this, "Kho hàng không đủ", Toast.LENGTH_SHORT).show();
+                }
                 // còn phải trừ quanity của product nữa nhưng chưa có database products
                 //object.setNumberInCart(numberOrder);
 //                managementCart.insertItem(object);
