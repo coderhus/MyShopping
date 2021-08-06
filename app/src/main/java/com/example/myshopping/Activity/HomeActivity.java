@@ -215,7 +215,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         // thêm số lượng thông báo
-        bottomNavigationView.getOrCreateBadge(R.id.nav_notifications).setNumber(0);
+        DatabaseReference myRef2 = database.getReference("Notification").child(SupportCode.getUID());
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                int count = snapshot.child("count").getValue(Integer.class);
+                bottomNavigationView.getOrCreateBadge(R.id.nav_notifications).setNumber(count);
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
+            }
+        });
     }
 
 

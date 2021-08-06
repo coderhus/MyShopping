@@ -33,14 +33,15 @@ public class NotificationActivity extends AppCompatActivity {
     NotifiAdapter notifiAdapter;
     List<Notifications> list;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Notification").child(SupportCode.getUID());
+    DatabaseReference myRef = database.getReference("Notification").child(SupportCode.getUID()).child("list_notification");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nofitication);
         Anhxa();
         bottomNavigationView();
-
+        // vao trang thong bao thi noti ve 0
+        SupportCode.changecountNoti(SupportCode.getUID(),0);
         initList();
     }
 

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myshopping.Model.Cart;
 import com.example.myshopping.Model.Products;
+import com.example.myshopping.Model.Rate;
 import com.example.myshopping.R;
 import com.example.myshopping.Model.Users;
 import com.example.myshopping.SupportCode.SupportCode;
@@ -27,8 +28,10 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -159,7 +162,12 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         }
     }
-
+    public void createNoti(String id){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Rate");
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", 0);
+        databaseReference.child(id).setValue(map);
+    }
     public void pushInfotoDatabase(String mail){
         //tạo database của users
         String name = username.getText().toString();
@@ -171,6 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Cart a = new Cart(id,0,null);
         myRef.child("Cart").child(id).setValue(a);
+        createNoti(id);
     }
 
     private void AnhXa() {

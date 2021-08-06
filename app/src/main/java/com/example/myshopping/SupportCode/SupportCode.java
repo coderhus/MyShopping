@@ -96,7 +96,7 @@ public class SupportCode {
         databaseReference.updateChildren(map);
     }
     public static void addNotification(String hisID,String description,int type) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Notification").child(hisID);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Notification").child(hisID).child("list_notification");
         Notifications notification = new Notifications();
         notification.setId(getUID());
         notification.setDescription(description);
@@ -114,9 +114,26 @@ public class SupportCode {
 
             }
         });
-
+        changecountNoti(hisID,1);
     }
+    public static void changecountNoti(String hisID,int change){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Notification").child(hisID);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                int count = snapshot.child("count").getValue(Integer.class);
+                if(change==0) count=0;
+                else
+                count++;
+                databaseReference.child("count").setValue(count);
+            }
 
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
+            }
+        });
+    }
     public static void addRate(String productID,double rate){
         // set rate ban daau
         if(rate==-1){
