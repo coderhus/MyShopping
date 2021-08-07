@@ -137,6 +137,7 @@ public class CartActivity extends AppCompatActivity {
             DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Orders_Seller");
             databaseReference2.child(id).child(time).setValue(0);
             getToken("Có người đặt hàng",id,time);
+            SupportCode.addNotification(id,"đã đặt hàng bên bạn",0);
         }
         managementCart.clear();
 
@@ -166,6 +167,7 @@ public class CartActivity extends AppCompatActivity {
         });
         return check;
     }
+    // gui notification ve may nguoi ban
     private void getToken(String message, String hisID,String chatID){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(hisID);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -185,7 +187,7 @@ public class CartActivity extends AppCompatActivity {
                             data.put("message", message);
                             data.put("hisID", SupportCode.getUID());
                             data.put("hisImage",photo);
-                            data.put("chatID", chatID);
+                            data.put("orderID", chatID);
 
                             to.put("to", token);
                             to.put("data", data);
@@ -239,6 +241,8 @@ public class CartActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }
+
+
     private void bottomNavigationView() {
         bottomNavigationView.setSelectedItemId(R.id.nav_cart);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

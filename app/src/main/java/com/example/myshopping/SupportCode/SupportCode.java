@@ -102,12 +102,17 @@ public class SupportCode {
         notification.setDescription(description);
         notification.setTime(String.valueOf(System.currentTimeMillis()));
         notification.setType(type);
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users user = dataSnapshot.getValue(Users.class);
-               notification.setPhoto(user.getPhoto());
-               databaseReference.child(notification.getTime()).setValue(notification);
+                if(type==0){
+                    notification.setDescription(user.getName()+" "+notification.getDescription());
+                }
+               // chua co photo notification.setPhoto(user.getPhoto());
+                String photo ="https://anhdep123.com/wp-content/uploads/2020/05/cho-con.jpg" ;
+                notification.setPhoto(photo);
+                databaseReference.child(notification.getTime()).setValue(notification);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

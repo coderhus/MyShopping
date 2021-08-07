@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.myshopping.Model.Notifications;
 import com.example.myshopping.R;
 import com.example.myshopping.Model.Products;
+import com.example.myshopping.SupportCode.SupportCode;
 
 
 import java.util.List;
@@ -46,7 +47,8 @@ public class NotifiAdapter extends RecyclerView.Adapter<NotifiAdapter.NotifiView
     public void onBindViewHolder(@NonNull NotifiViewHolder holder, int position) {
         Glide.with(context).load(notifiList.get(position).getPhoto()).into(holder.photos);
         //holder.photos.setImageResource(notifiList.get(position).getPhoto());
-        holder.time.setText(notifiList.get(position).getTime());
+        Long a = Long.parseLong(notifiList.get(position).getTime());
+        holder.time.setText(SupportCode.getTimeAgo(a));
         holder.des.setText(String.valueOf(notifiList.get(position).getDescription()));
 
 
