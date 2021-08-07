@@ -20,6 +20,7 @@ public class ManagementCart {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef1 = database.getReference("Cart").child(user.getUid());
     DatabaseReference myRef = database.getReference("Cart").child(user.getUid()).child("list_Products");
+    private ChangeNumberItemsListener changeNumberItemsListener;
     public ManagementCart(Context context) {
         this.context = context;
         this.tinyDB = new TinyDB(context);
@@ -51,14 +52,19 @@ public class ManagementCart {
     public ArrayList<Products> getListCard() {
         return tinyDB.getListObject("CardList");
     }
-
+    public void clear(){
+        myRef.setValue(null);
+        myRef1.child("count").setValue(0);
+        tinyDB.clear();
+    }
     public void plusNumberFood(ArrayList<Products> cartItems, int position, ChangeNumberItemsListener changeNumberItemsListener) {
         Products temp = cartItems.get(position);
         temp.addQuanity(1);
         cartItems.get(position).setQuanity(temp.getQuanity());
         myRef.child(temp.getId_products()).setValue(temp);
-        tinyDB.putListObject("CardList", cartItems);
+        tinyDB.putListObject("CardList", null);
         changeNumberItemsListener.changed();
+
     }
 
     public void MinusNumerFood(ArrayList<Products> cartItems, int position, ChangeNumberItemsListener changeNumberItemsListener) {

@@ -44,19 +44,20 @@ public class NotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull  RemoteMessage remoteMessage) {
         if (remoteMessage.getData().size() > 0) {
             Map<String, String> map = remoteMessage.getData();
+            String type = map.get("type");
             String title = map.get("title");
             String message = map.get("message");
             String hisID = map.get("hisID");
             String hisImage = map.get("hisImage");
             String chatID = map.get("chatID");
-
-            Log.d("TAG", "onMessageReceived: chatID is " + chatID + "\n hisID" + hisID);
+            String orderID = map.get("orderID");
+           // Log.d("TAG", "onMessageReceived: chatID is " + chatID + "\n hisID" + hisID);
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O)
-                createOreoNotification(title, message, hisID, hisImage, chatID);
+                createOreoNotification_message(type,title, message, hisID, hisImage,chatID,orderID);
             else {
                 try {
-                    createNormalNotification(title, message, hisID, hisImage, chatID);
+                    createNormalNotification_message(type,title, message, hisID, hisImage, chatID,orderID);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -85,7 +86,7 @@ public class NotificationService extends FirebaseMessagingService {
         map.put("token",token);
         databaseReference.updateChildren(map);
     }
-    private void createNormalNotification(String title, String message, String hisID, String hisImage, String chatID) throws ExecutionException, InterruptedException {
+    private void createNormalNotification_message(String type,String title, String message, String hisID, String hisImage, String chatID,String orderID) throws ExecutionException, InterruptedException {
         Bitmap theBitmap = null;
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         try {
@@ -111,23 +112,32 @@ public class NotificationService extends FirebaseMessagingService {
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null))
                 .setSound(uri);
+        if(chatID!="") {
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("chatID", chatID);
+            intent.putExtra("hisID", hisID);
+            intent.putExtra("name", title);
+            intent.putExtra("hisImage", hisImage);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        Intent intent = new Intent(this, MessageActivity.class);
-        intent.putExtra("chatID", chatID);
-        intent.putExtra("hisID", hisID);
-        intent.putExtra("name", title);
-        intent.putExtra("hisImage", hisImage);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-        builder.setContentIntent(pendingIntent);
-
+            builder.setContentIntent(pendingIntent);
+        }
+        else if (orderID!=""){
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("orderID", orderID);
+            intent.putExtra("hisID", hisID);
+            intent.putExtra("name", title);
+            intent.putExtra("hisImage", hisImage);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            builder.setContentIntent(pendingIntent);
+        }
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(new Random().nextInt(85 - 65), builder.build());
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void createOreoNotification(String title, String message, String hisID, String hisImage, String chatID) {
+    private void createOreoNotification_message(String type,String title, String message, String hisID, String hisImage, String chatID,String orderID) {
         Bitmap theBitmap = null;
         try {
             theBitmap = Glide.
@@ -149,15 +159,24 @@ public class NotificationService extends FirebaseMessagingService {
 
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
-
-        Intent intent = new Intent(this, MessageActivity.class);
-        intent.putExtra("hisID", hisID);
-        intent.putExtra("hisImage", hisImage);
-        intent.putExtra("name", title);
-        intent.putExtra("chatID", chatID);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
+        PendingIntent pendingIntent;
+        if(hisID!="") {
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("hisID", hisID);
+            intent.putExtra("hisImage", hisImage);
+            intent.putExtra("name", title);
+            intent.putExtra("chatID", chatID);
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            // Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        }
+        else {
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("hisID", hisID);
+            intent.putExtra("hisImage", hisImage);
+            intent.putExtra("name", title);
+            intent.putExtra("chatID", chatID);
+            pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        }
         Notification notification = new Notification.Builder(this, Constants.CHANNEL_ID)
                 .setShowWhen(true)
                 .setContentTitle(title)

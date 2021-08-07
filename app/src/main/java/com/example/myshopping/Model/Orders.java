@@ -1,7 +1,7 @@
 package com.example.myshopping.Model;
 
 public class Orders {
-    private String id_Orders;
+    private String id_orders;
     private String id_seller;
     private String id_buyer;
     private int status; // quá trình vận chuyển
@@ -16,11 +16,50 @@ public class Orders {
     }
 
     public Orders(String id_Orders, String id_seller, String id_buyer, int status, String created_at) {
-        this.id_Orders = id_Orders;
+        this.id_orders = id_Orders;
         this.id_seller = id_seller;
         this.id_buyer = id_buyer;
         this.status = status;
         this.created_at = created_at;
     }
 
+    public String getId_orders() {
+        return id_orders;
+    }
+
+    public void setId_orders(String id_orders) {
+        this.id_orders = id_orders;
+    }
+
+    public String getId_seller() {
+        return id_seller;
+    }
+
+    public void setId_seller(String id_seller) {
+        this.id_seller = id_seller;
+    }
+
+    public String getId_buyer() {
+        return id_buyer;
+    }
+
+    public void setId_buyer(String id_buyer) {
+        this.id_buyer = id_buyer;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 }
