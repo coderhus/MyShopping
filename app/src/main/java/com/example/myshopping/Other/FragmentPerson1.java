@@ -3,14 +3,19 @@ package com.example.myshopping.Other;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.myshopping.Activity.DetailsActivity;
+import com.example.myshopping.Adapter.ItemBuyerAdapter;
+import com.example.myshopping.Model.Products;
 import com.example.myshopping.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,28 +24,22 @@ import com.example.myshopping.R;
  */
 public class FragmentPerson1 extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
+    RecyclerView recyclerView;
+    List<Products> list;
+
     public FragmentPerson1() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentPerson1.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static FragmentPerson1 newInstance(String param1, String param2) {
         FragmentPerson1 fragment = new FragmentPerson1();
         Bundle args = new Bundle();
@@ -57,7 +56,7 @@ public class FragmentPerson1 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        System.out.println("DMMMMMDDDDDDDDD");
+
 
 
     }
@@ -65,7 +64,17 @@ public class FragmentPerson1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_person1, container, false);
+        View view = inflater.inflate(R.layout.fragment_person1, container, false);
+
+        list =new ArrayList<>();
+        list.add(new Products());
+        list.add(new Products());
+        list.add(new Products());
+
+        recyclerView =view.findViewById(R.id.recyclerview);
+        ItemBuyerAdapter itemAdapter =new ItemBuyerAdapter(view.getContext(),list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
+        recyclerView.setAdapter(itemAdapter);
+        return view;
     }
 }

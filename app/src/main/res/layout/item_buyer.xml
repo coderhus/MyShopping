@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/view1"
+        android:background="@color/light_white"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"/>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_below="@id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:id="@+id/tieude"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:drawableLeft="@drawable/ic_mall_color_24"
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#F84F4F"
+                android:textStyle="bold"
+                android:text="Mall"/>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/name_shop"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:text="shopdidongSin"/>
+
+            <TextView
+                android:textSize="12sp"
+                android:gravity="end"
+                android:padding="5dp"
+                android:id="@+id/trangthai"
+                android:textColor="#F84F4F"
+                android:text="Chưa hoàn thành"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/donhang"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tieude"
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/popularfood1"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Bánh bao trôi"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:textSize="12sp"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:text="Bánh bao trôi"/>
+
+                    <TextView
+                        android:gravity="center_vertical|end"
+                        android:textSize="12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="x1"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:gravity="center_vertical|end"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="đ250.000"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@id/view2"
+            android:layout_below="@id/donhang"
+            android:background="@color/light_white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <LinearLayout
+            android:id="@+id/thanhtien"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 sản phẩm"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_save_money"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical|end"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thành tiền: đ260.000"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@id/view3"
+            android:layout_below="@id/thanhtien"
+            android:background="@color/light_white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <LinearLayout
+            android:id="@+id/thanhtrangthai"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_delivery_24"
+                android:layout_width="300dp"
+                android:text="Giao hàng thành công"
+                android:layout_height="wrap_content"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:drawableRight="@drawable/ic_arrow_forward_blue"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@id/view4"
+            android:layout_below="@id/thanhtrangthai"
+            android:background="@color/light_white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <LinearLayout
+            android:weightSum="3"
+            android:id="@+id/tuychon"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Đơn hàng đang chờ xác nhận của bên bán trước ngày 06-09-2021 nhé"
+                android:textSize="12sp"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="Liên hệ"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_tuychon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
