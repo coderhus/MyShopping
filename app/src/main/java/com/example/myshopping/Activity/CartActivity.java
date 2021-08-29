@@ -22,7 +22,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myshopping.Constants.Constants;
 import com.example.myshopping.Model.Orders;
-import com.example.myshopping.Model.Orders_item;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.Other.ChangeNumberItemsListener;
 import com.example.myshopping.Other.ManagementCart;
@@ -124,18 +123,22 @@ public class CartActivity extends AppCompatActivity {
         for(int i=0;i<countSeller.size();i++){
             String id = countSeller.get(i);
             Orders orders = new Orders(time,id,SupportCode.getUID(),0,time);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Orders");
-            databaseReference.child(time).setValue(orders);
+            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Orders_Buyer");
+            databaseReference1.child(SupportCode.getUID()).child(time).setValue(orders);
             for(int j=0;j<list.size();j++){
                 if(list.get(j).getId_seller().equals(id)){
-                    databaseReference.child(time).child("list_order").child(list.get(j).getId_products()).setValue(list.get(j));
+                    databaseReference1.child(SupportCode.getUID()).child(time).child("list_order").child(list.get(j).getId_products()).setValue(list.get(j));
                 }
             }
-            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Orders_Buyer");
             // status 0 là chưa xác nhận hàng
-            databaseReference1.child(SupportCode.getUID()).child(time).setValue(0);
             DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Orders_Seller");
-            databaseReference2.child(id).child(time).setValue(0);
+            databaseReference2.child(id).child(time).setValue(orders);
+            for(int j=0;j<list.size();j++){
+                if(list.get(j).getId_seller().equals(id)){
+                    databaseReference2.child(id).child(time).child("list_order").child(list.get(j).getId_products()).setValue(list.get(j));
+                }
+            }
+
             getToken("Có người đặt hàng",id,time);
             SupportCode.addNotification(id,"đã đặt hàng bên bạn",0);
         }

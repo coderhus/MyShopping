@@ -2,6 +2,7 @@ package com.example.myshopping.Other;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myshopping.Adapter.ItemBuyerAdapter;
+import com.example.myshopping.Model.Notifications;
+import com.example.myshopping.Model.Orders;
 import com.example.myshopping.Model.Products;
 import com.example.myshopping.R;
+import com.example.myshopping.SupportCode.SupportCode;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,16 +76,40 @@ public class FragmentPerson1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person1, container, false);
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+       list =new ArrayList<>();
+        // Most viewed posts
+        Query orderslist = mDatabase.child("Orders_Buyer").child(SupportCode.getUID());
+        orderslist.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot postsnap: snapshot.getChildren()) {
+                    Orders a = postsnap.getValue(Orders.class);
+                    list.addAll(a.getList());
 
-        list =new ArrayList<>();
-        list.add(new Products());
-        list.add(new Products());
-        list.add(new Products());
+                }
+                //
+                if(!list.isEmpty()){
 
-        recyclerView =view.findViewById(R.id.recyclerview);
-        ItemBuyerAdapter itemAdapter =new ItemBuyerAdapter(view.getContext(),list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
-        recyclerView.setAdapter(itemAdapter);
+                    recyclerView =view.findViewById(R.id.recyclerview);
+                    ItemBuyerAdapter itemAdapter =new ItemBuyerAdapter(view.getContext(),list);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
+                    recyclerView.setAdapter(itemAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
+            }
+        });
+     /*    list.add(new Products());
+        list.add(new Products());
+        list.add(new Products());*/
+
+
         return view;
     }
 }

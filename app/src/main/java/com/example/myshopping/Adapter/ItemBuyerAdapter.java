@@ -44,6 +44,7 @@ public class ItemBuyerAdapter extends RecyclerView.Adapter<ItemBuyerAdapter.Item
 
 
     public  static class ItemViewHolder extends RecyclerView.ViewHolder{
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
         }
