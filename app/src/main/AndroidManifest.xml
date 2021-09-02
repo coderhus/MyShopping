@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.SelectCategoryActivity"></activity>
-        <activity android:name=".Activity.PushActivity"></activity>
+        <activity android:name=".Activity.InformationActivity"></activity>
+        <activity android:name=".Activity.SelectCategoryActivity" />
+        <activity android:name=".Activity.PushActivity" />
         <activity android:name=".Activity.PersonActivity" />
         <activity android:name=".Activity.NotificationActivity" />
         <activity android:name=".Activity.ChatActivity" />
@@ -33,11 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".Notification.NotificationService">
+
+        <service android:name=".Notification.NotificationService">
             android:stopWithTask="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>
