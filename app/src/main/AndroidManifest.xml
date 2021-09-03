@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.InformationActivity"></activity>
+        <activity android:name=".Activity.PayActivity"></activity>
+        <activity android:name=".Activity.InformationActivity" />
         <activity android:name=".Activity.SelectCategoryActivity" />
         <activity android:name=".Activity.PushActivity" />
         <activity android:name=".Activity.PersonActivity" />
